@@ -1,8 +1,39 @@
+import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename); 
+const __dirname = path.dirname(__filename);
+
+/**
+ * The guide's pages: pages/<language>/NN-name.md, in file order.
+ * Menu titles stay in English in both languages: Magidoc makes each page's URL from its title and can't
+ * find a page with an Arabic URL, so an Arabic page shows its Arabic title as its heading instead.
+ */
+const titles = ["Getting started", "Authentication", "Create a shipment", "Track shipments", "Webhooks", "Codes", "Errors", "What changed"];
+const arabicTitles = ["البداية", "المصادقة", "إنشاء شحنة", "متابعة الشحنات", "الإشعارات (Webhooks)", "الأكواد", "الأخطاء", "ما الجديد"];
+
+/** Arabic reads right to left: the text between code blocks goes in an RTL block (Magidoc drops code blocks inside one) */
+const rightToLeft = (markdown) =>
+	markdown
+		.split(/(```[\s\S]*?```)/)
+		.map((part) => (part.startsWith("```") || !part.trim() ? part : `<div dir="rtl">\n\n${part.trim()}\n\n</div>`))
+		.join("\n\n");
+
+const guide = (language) => {
+	const dir = path.join(__dirname, "pages", language);
+	return fs
+		.readdirSync(dir)
+		.filter((file) => file.endsWith(".md"))
+		.sort()
+		.map((file, index) => {
+			const content = fs.readFileSync(path.join(dir, file), "utf8");
+			return {
+				title: titles[index],
+				content: language === "ar" ? rightToLeft(`# ${arabicTitles[index]}\n\n${content}`) : `# ${titles[index]}\n\n${content}`,
+			};
+		});
+};
 
 export default {
 	introspection: {
@@ -13,39 +44,16 @@ export default {
 		template: "carbon-multi-page",
 		staticAssets: path.join(__dirname, "assets"),
 		options: {
-			appTitle: "Accurate Api Documentation",
+			appTitle: "Accurate API",
 			appLogo: "/Accurate-logistics.png",
 			siteRoot: "/accuratess",
 			pages: [
-				{
-					title: "Accurate Api",
-					content: `
-            Accurate Api Documentation
-            `,
-				},
-				{
-					title: "Callback url",
-					content: `
-            Webhook callback url to listen any update status occurred to shipment via post request
-            -- data returned from callback as a json
-            {
-              "shipmentId": shipment id,
-              "typeCode": type listen for update,
-              "shipmentStatusCode": shipment status,
-              "returnTypeCode": if shipment returned, type of return,
-              "deliveryTypeCode": if shipment delivered, type of delivery,
-              "deliveredAmount": amount of delivered,
-              "collectedFees": amount of collected fees,
-              "deliveryDate": delivery date for shipment,
-              "cancellationReasonId": if shipment cancelled, the reason of cancellation,
-              "notes": notes for shipment
-            }
-            `,
-				},
+				{ title: "English", content: guide("en") },
+				{ title: "Arabic", content: guide("ar") },
 			],
 			queryGenerationFactories: {
 				Time: "00:00",
-				DateTime: "2025-01-01 00:00:00"
+				DateTime: "2025-01-01 00:00:00",
 			},
 		},
 	},

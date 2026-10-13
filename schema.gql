@@ -1,66 +1,67 @@
-type Mutation {
-	login(input: LoginInput!): UserWithToken!
-	saveShipment(input: ShipmentInput!): Shipment
-}
-
 type Query {
-	listZonesDropdown(input: ListZonesFilterInput): [DropDownEntry]
-	listCountriesDropdown: [DropDownEntry]!
+	listCountriesDropdown: [DropdownEntry]!
+	listLookupEntriesDropdown(
+		input: ListLookupEntriesFilterInput!
+	): [DropdownEntry]
+	shipment(
+		id: Int
+		code: String
+	): Shipment
+	calculateShipmentFees(
+		input: CalculateShipmentFeesInput!
+	): ShipmentFees!
+	listShipmentTypesDropdown(
+		serviceId: Int
+		mobileActive: Boolean
+	): [DropdownEntry]
 	listPaymentTypesDropdown(
 		input: ListPaymentTypesDropdownInput
-	): [DropDownEntry]
-	shipment(id: Int, code: String): Shipment
+	): [DropdownEntry]
+	listShippingServicesDropdown(
+		input: ListShippingServicesFilterInput
+	): [DropdownEntry]!
+	listZonesDropdown(
+		input: ListZonesFilterInput
+	): [DropdownEntry]
 	listShipments(
 		input: ListShipmentsFilterInput
-
 		"""
 		Limits number of fetched items. Maximum allowed value: 100.
 		"""
 		first: Int! = 10
-
 		"""
 		The offset from which items are returned.
 		"""
 		page: Int
 	): ShipmentPaginator!
-	listLookupEntriesDropdown(
-		"""
-		Code in ListLookupEntriesFilterInput for Dropdown used for Save Shipment
-		SHP_PRICE_TYPE 		=> for list price type,
-		SHP_OPEN_PACKAGE 	=> for list package openable
-		"""
-		input: ListLookupEntriesFilterInput!
-	): [DropDownEntry]
-	listShippingServicesDropdown(
-		input: ListShippingServicesFilterInput
-	): [DropDownEntry]!
-	calculateShipmentFees(input: CalculateShipmentFeesInput!): ShipmentFees!
-	listShipmentTypesDropdown(
-		serviceId: Int
-		mobileActive: Boolean
-	): [DropDownEntry]
-}
-scalar DateTime
-
-scalar Date
-
-scalar Time
-
-scalar Upload
-
-type ShipmentFees {
-	amount: Float!
-	delivery: Float!
-	weight: Float!
-	collection: Float!
-	post: Float!
-	tax: Float!
-	return: Float!
-	total: Float!
 }
 
-input ListPaymentTypesDropdownInput {
-	customerId: Int
+type Mutation {
+	login(
+		input: LoginInput!
+	): UserWithToken!
+	saveShipment(
+		input: ShipmentInput!
+	): Shipment
+}
+
+input BoxSizeInput {
+	length: Float!
+	width: Float!
+	height: Float!
+}
+
+type Branch {
+	id: Int!
+	code: String!
+	name: String!
+	active: Boolean!
+	main: Boolean!
+	address: String
+	phone: String
+	fax: String
+	country: Country
+	warehouseSections: [WarehouseSection]
 }
 
 input CalculateShipmentFeesInput {
@@ -78,83 +79,68 @@ input CalculateShipmentFeesInput {
 	paymentTypeCode: ShipmentPaymentTypeCode
 }
 
+type Country {
+	id: Int!
+	code: String!
+	name: String!
+}
+
+"""Customer type code"""
+enum CustomerTypeCode {
+  """Merchant"""
+  MERCHANT
+
+  """Individual"""
+  INDIVIDUAL
+
+  """Concierge"""
+  CONCIERGE
+}
+
+scalar Date
+
+input DateFilterInput {
+	fromDays: Int
+	fromDate: Date
+	toDate: Date
+}
+
+scalar DateTime
+
+input DeliveryAgentCustodyInput {
+	deliveryAgentId: Int
+}
+
+type DropdownEntry {
+	id: Int
+	code: String
+	name: String
+}
+
+input FilterZonesByServiceInput {
+	serviceId: Int!
+	customerId: Int
+	customerTypeCode: CustomerTypeCode
+	fromZoneId: Int
+	fromSubzoneId: Int
+}
+
 type Image {
 	path: String!
 	subjectCode: String
 }
 
-input ListShippingServicesFilterInput {
-	customerTypeCode: CustomerTypeCode
-	customerId: Int
-	active: Boolean
-}
-
-"""
-Information about pagination using a fully featured paginator.
-"""
-type PaginatorInfo {
-	"""
-	Number of items in the current page.
-	"""
-	count: Int!
-
-	"""
-	Index of the current page.
-	"""
-	currentPage: Int!
-
-	"""
-	Index of the first item in the current page.
-	"""
-	firstItem: Int
-
-	"""
-	Are there more pages after this one?
-	"""
-	hasMorePages: Boolean!
-
-	"""
-	Index of the last item in the current page.
-	"""
-	lastItem: Int
-
-	"""
-	Index of the last available page.
-	"""
-	lastPage: Int!
-
-	"""
-	Number of items per page.
-	"""
-	perPage: Int!
-
-	"""
-	Number of total available items.
-	"""
-	total: Int!
-}
-
 input ImageInput {
-	"""
-	file Uploaded
-	"""
-	# file: Upload!
+	file: Upload!
 	subjectCode: String
 }
 
-"""
-A paginated list of Shipment items.
-"""
-type ShipmentPaginator {
-	"""
-	Pagination information about the list of items.
-	"""
-	paginatorInfo: PaginatorInfo!
+input ListLookupEntriesFilterInput {
+	code: String!
+}
 
-	"""
-	A list of Shipment items.
-	"""
-	data: [Shipment!]!
+input ListPaymentTypesDropdownInput {
+	customerId: Int
 }
 
 input ListShipmentsFilterInput {
@@ -168,7 +154,7 @@ input ListShipmentsFilterInput {
 	branchId: Int
 	originBranchId: Int
 	serviceId: Int
-	customerId: Int
+	customerId: [Int]
 	userId: Int
 	inDeliveryAgentCustody: DeliveryAgentCustodyInput
 	senderZoneId: [Int]
@@ -199,344 +185,26 @@ input ListShipmentsFilterInput {
 	routeId: [Int]
 }
 
-input DeliveryAgentCustodyInput {
-	deliveryAgentId: Int
-}
-
-"""
-Shipment return type code
-"""
-enum ShipmentReturnTypeCode {
-	"""
-	Ffc
-	"""
-	FFC
-
-	"""
-	Fpc
-	"""
-	FPC
-
-	"""
-	Wfdf
-	"""
-	WFDF
-
-	"""
-	Wodf
-	"""
-	WODF
-
-	"""
-	Wpdf
-	"""
-	WPDF
-
-	"""
-	Prts
-	"""
-	PRTS
-}
-
-"""
-Shipment delivery type code
-"""
-enum ShipmentDeliveryTypeCode {
-	"""
-	Fd
-	"""
-	FD
-
-	"""
-	Pd
-	"""
-	PD
-}
-
-"""
-Shipment status code
-"""
-enum ShipmentStatusCode {
-	"""
-	Bmr
-	"""
-	BMR
-
-	"""
-	Bmt
-	"""
-	BMT
-
-	"""
-	Dex
-	"""
-	DEX
-
-	"""
-	Dtr
-	"""
-	DTR
-
-	"""
-	Htr
-	"""
-	HTR
-
-	"""
-	Otd
-	"""
-	OTD
-
-	"""
-	Otr
-	"""
-	OTR
-
-	"""
-	Pkd
-	"""
-	PKD
-
-	"""
-	Pkh
-	"""
-	PKH
-
-	"""
-	Pkm
-	"""
-	PKM
-
-	"""
-	Pkr
-	"""
-	PKR
-
-	"""
-	Rits
-	"""
-	RITS
-
-	"""
-	Rjct
-	"""
-	RJCT
-
-	"""
-	Rtrn
-	"""
-	RTRN
-
-	"""
-	Rts
-	"""
-	RTS
-
-	"""
-	Prp
-	"""
-	PRP
-
-	"""
-	Prpd
-	"""
-	PRPD
-
-	"""
-	Std
-	"""
-	STD
-
-	"""
-	Rcv
-	"""
-	RCV
-}
-
-input DateFilterInput {
-	fromDays: Int
-	fromDate: Date
-	toDate: Date
-}
-
-type Shipment {
-	id: Int!
-	code: String!
-	type: LookupEntry!
-	openable: LookupEntry!
-	date: DateTime!
-	createdAt: DateTime!
-	updatedAt: DateTime
-	deliveryDate: Date
-	deliveredOrReturnedDate: DateTime
-
-	description: String
-	weight: Float!
-	piecesCount: Int!
-	collected: Boolean!
-	paidToCustomer: Boolean!
-	paidToDeliveryAgent: Boolean!
-	editable: Boolean!
-	trackingUrl: String!
-	deletable: Boolean!
-
-	hasProducts: Boolean!
-	inWarehouse: Boolean!
-	unpacked: Boolean!
-	refNumber: String
-	notes: String
-	adminNotes: String
-	returnPiecesCount: Int
-	paymentType: LookupEntry!
-	priceType: LookupEntry!
-	deliveryType: LookupEntry
-	returnType: LookupEntry
-	transactionType: TransactionType!
-	branch: Branch!
-	originBranch: Branch!
-	status: LookupEntry!
-	returnStatus: LookupEntry
-
-	service: ShippingService!
-	history: [Shipment!]!
-	createdBy: User!
-	updatedBy: User
-	warehouseSection: WarehouseSection
-	customerType: LookupEntry!
-	attempts: Int
-	cancellable: Boolean!
-	cancelled: Boolean!
-
-	price: Float!
-	amount: Float!
-	deliveryFees: Float!
-	extraWeightFees: Float!
-	collectionFees: Float!
-	totalAmount: Float!
-	deliveredAmount: Float!
-	returningDueFees: Float!
-	returnedValue: Float!
-	allDueFees: Float!
-	collectedFees: Float!
-	customerDue: Float!
-	collectedAmount: Float!
-	pendingCollectionAmount: Float!
-	returnFees: Float!
-	postFees: Float!
-	tax: Float!
-	deliveryCommission: Float
-
-	recipientName: String
-	recipientPhone: String
-	recipientMobile: String!
-	recipientZone: Zone!
-	recipientSubzone: Zone!
-	recipientAddress: String!
-	recipientPostalCode: String
-	recipientLatitude: Float
-	recipientLongitude: Float
-
-	senderName: String
-	senderPhone: String
-	senderMobile: String
-	senderZone: Zone
-	senderSubzone: Zone
-	senderAddress: String
-	senderPostalCode: String
-	senderLatitude: Float
-	senderLongitude: Float
-
-	deliveryOtp: String
-	hasDeliveryOtp: Boolean!
-	images: [Image]
-}
-
-type ShippingService {
-	id: Int!
-	code: String!
-	name: String!
-	days: Int!
-	egsCode: String
-	active: Boolean!
-	branch: Branch
-	shipmentTypes: [LookupEntry]
-}
-
-type TransactionType {
-	id: Int!
-	code: String!
-	name: String!
-	active: Boolean!
-	type: LookupEntry
-	sequence: Sequence
-	branch: Branch
-}
-
-type Zone {
-	id: Int!
-	code: String!
-	name: String!
-	parent: Zone
+input ListShippingServicesFilterInput {
+	customerTypeCode: CustomerTypeCode
+	customerId: Int
 	active: Boolean
-	branch: Branch
-	children: [Zone]
 }
 
-type Branch {
-	id: Int!
-	code: String!
-	name: String!
-	active: Boolean!
-	main: Boolean!
-	address: String
-	phone: String
-	fax: String
-	country: Country
-	state: State
-	city: City
-	area: Area
-	warehouseSections: [WarehouseSection]
+input ListZonesFilterInput {
+	name: String
+	parentId: Int
+	countryId: Int
+	branchId: Int
+	active: Boolean
+	service: FilterZonesByServiceInput
 }
 
-type WarehouseSection {
-	id: Int!
-	name: String!
-	branch: Branch!
-	active: Boolean!
-	shipments: [Shipment]
-}
-
-type Area {
-	id: Int!
-	code: String!
-	name: String!
-	city: City!
-}
-
-type City {
-	id: Int!
-	code: String!
-	name: String!
-	state: State!
-}
-
-type State {
-	id: Int!
-	code: String!
-	name: String!
-	country: Country!
-}
-
-type Country {
-	id: Int!
-	code: String!
-	name: String!
-}
-
-type Sequence {
-	id: Int!
-	code: String!
-	name: String!
+input LoginInput {
+	username: String!
+	password: String!
+	rememberMe: Boolean! = true
+	fcmToken: String
 }
 
 type Lookup {
@@ -556,11 +224,175 @@ type LookupEntry {
 	mobileActive: Boolean
 }
 
+"""
+Information about pagination using a fully featured paginator.
+"""
+type PaginatorInfo {
+	"""
+	Number of items in the current page.
+	"""
+	count: Int!
+	"""
+	Index of the current page.
+	"""
+	currentPage: Int!
+	"""
+	Index of the first item in the current page.
+	"""
+	firstItem: Int
+	"""
+	Are there more pages after this one?
+	"""
+	hasMorePages: Boolean!
+	"""
+	Index of the last item in the current page.
+	"""
+	lastItem: Int
+	"""
+	Index of the last available page.
+	"""
+	lastPage: Int!
+	"""
+	Number of items per page.
+	"""
+	perPage: Int!
+	"""
+	Number of total available items.
+	"""
+	total: Int!
+}
+
+type Permission {
+	id: Int!
+	name: String!
+	slug: String!
+}
+
+type Role {
+	id: Int!
+	code: String!
+	name: String!
+	usersCount: Int!
+	permissions: [Permission]!
+}
+
+type Sequence {
+	id: Int!
+	code: String
+	name: String!
+}
+
+type Shipment {
+	id: Int!
+	code: String!
+	type: LookupEntry!
+	openable: LookupEntry!
+	date: DateTime!
+	createdAt: DateTime!
+	updatedAt: DateTime
+	deliveryDate: Date
+	deliveredOrReturnedDate: DateTime
+	description: String
+	weight: Float!
+	piecesCount: Int!
+	collected: Boolean!
+	paidToCustomer: Boolean!
+	paidToDeliveryAgent: Boolean!
+	editable: Boolean!
+	trackingUrl: String!
+	deletable: Boolean!
+	hasProducts: Boolean!
+	inWarehouse: Boolean!
+	unpacked: Boolean!
+	refNumber: String
+	notes: String
+	adminNotes: String
+	returnPiecesCount: Int
+	paymentType: LookupEntry!
+	priceType: LookupEntry!
+	deliveryType: LookupEntry
+	returnType: LookupEntry
+	transactionType: TransactionType!
+	branch: Branch!
+	originBranch: Branch!
+	status: LookupEntry!
+	returnStatus: LookupEntry
+	service: ShippingService!
+	history: [Shipment!]!
+	createdBy: User
+	updatedBy: User
+	warehouseSection: WarehouseSection
+	customerType: LookupEntry!
+	attempts: Int
+	cancellable: Boolean!
+	cancelled: Boolean!
+	price: Float!
+	amount: Float!
+	deliveryFees: Float!
+	extraWeightFees: Float!
+	collectionFees: Float!
+	totalAmount: Float!
+	deliveredAmount: Float!
+	returningDueFees: Float!
+	returnedValue: Float!
+	allDueFees: Float!
+	collectedFees: Float!
+	customerDue: Float!
+	collectedAmount: Float!
+	pendingCollectionAmount: Float!
+	returnFees: Float!
+	postFees: Float!
+	tax: Float!
+	deliveryCommission: Float
+	recipientName: String
+	recipientPhone: String
+	recipientMobile: String!
+	recipientZone: Zone!
+	recipientSubzone: Zone!
+	recipientAddress: String!
+	recipientPostalCode: String
+	recipientLatitude: Float
+	recipientLongitude: Float
+	senderName: String
+	senderPhone: String
+	senderMobile: String
+	senderZone: Zone
+	senderSubzone: Zone
+	senderAddress: String
+	senderPostalCode: String
+	senderLatitude: Float
+	senderLongitude: Float
+	deliveryOtp: String
+	hasDeliveryOtp: Boolean!
+	images: [Image]
+}
+
+"""Shipment delivery type code"""
+enum ShipmentDeliveryTypeCode {
+  """Fd"""
+  FD
+
+  """Pd"""
+  PD
+}
+
+type ShipmentFees {
+	amount: Float!
+	delivery: Float!
+	weight: Float!
+	collection: Float!
+	post: Float
+	tax: Float
+	return: Float!
+	total: Float!
+}
+
 input ShipmentInput {
 	id: Int
 	code: String
 	date: DateTime
 	deliveryDate: Date
+	serviceId: Int!
 	description: String
 	refNumber: String
 	weight: Float
@@ -574,7 +406,6 @@ input ShipmentInput {
 	paymentTypeCode: ShipmentPaymentTypeCode
 	openableCode: ShipmentOpenableCode
 	shipmentProducts: [ShipmentProductInput]
-
 	senderName: String
 	senderZoneId: Int
 	senderSubzoneId: Int
@@ -584,15 +415,64 @@ input ShipmentInput {
 	senderPostalCode: String
 	senderLatitude: Float
 	senderLongitude: Float
-
 	recipientName: String
 	recipientZoneId: Int!
 	recipientSubzoneId: Int!
-	recipientPhone: String!
+	recipientPhone: String
 	recipientMobile: String!
 	recipientAddress: String!
 	recipientLatitude: Float
 	recipientLongitude: Float
+}
+
+"""Shipment openable code"""
+enum ShipmentOpenableCode {
+  """Y"""
+  Y
+
+  """N"""
+  N
+}
+
+"""
+A paginated list of Shipment items.
+"""
+type ShipmentPaginator {
+	"""
+	Pagination information about the list of items.
+	"""
+	paginatorInfo: PaginatorInfo!
+	"""
+	A list of Shipment items.
+	"""
+	data: [Shipment!]!
+}
+
+"""Shipment payment type code"""
+enum ShipmentPaymentTypeCode {
+  """Colc"""
+  COLC
+
+  """Paid"""
+  PAID
+
+  """Cash"""
+  CASH
+
+  """Crdt"""
+  CRDT
+
+  """Visa"""
+  VISA
+}
+
+"""Shipment price type code"""
+enum ShipmentPriceTypeCode {
+  """Excld"""
+  EXCLD
+
+  """Incld"""
+  INCLD
 }
 
 input ShipmentProductInput {
@@ -602,135 +482,135 @@ input ShipmentProductInput {
 	typeCode: ShipmentProductTypeCode
 }
 
-"""
-Shipment product type code
-"""
+"""Shipment product type code"""
 enum ShipmentProductTypeCode {
-	"""
-	In
-	"""
-	IN
+  """In"""
+  IN
 
-	"""
-	Out
-	"""
-	OUT
+  """Out"""
+  OUT
 }
 
-"""
-Shipment openable code
-"""
-enum ShipmentOpenableCode {
-	"""
-	Y
-	"""
-	Y
+"""Shipment return type code"""
+enum ShipmentReturnTypeCode {
+  """Ffc"""
+  FFC
 
-	"""
-	N
-	"""
-	N
+  """Fpc"""
+  FPC
+
+  """Wfdf"""
+  WFDF
+
+  """Wodf"""
+  WODF
+
+  """Wpdf"""
+  WPDF
+
+  """Prts"""
+  PRTS
 }
 
-"""
-Shipment payment type code
-"""
-enum ShipmentPaymentTypeCode {
-	"""
-	Colc
-	"""
-	COLC
+"""Shipment status code"""
+enum ShipmentStatusCode {
+  """Pkr"""
+  PKR
 
-	"""
-	Paid
-	"""
-	PAID
+  """Pkm"""
+  PKM
 
-	"""
-	Cash
-	"""
-	CASH
+  """Pkh"""
+  PKH
 
-	"""
-	Crdt
-	"""
-	CRDT
+  """Pkd"""
+  PKD
 
-	"""
-	Visa
-	"""
-	VISA
+  """Rjct"""
+  RJCT
+
+  """Bmr"""
+  BMR
+
+  """Bmt"""
+  BMT
+
+  """Prp"""
+  PRP
+
+  """Prpd"""
+  PRPD
+
+  """Rits"""
+  RITS
+
+  """Std"""
+  STD
+
+  """Otd"""
+  OTD
+
+  """Dtr"""
+  DTR
+
+  """Dex"""
+  DEX
+
+  """Htr"""
+  HTR
+
+  """Rts"""
+  RTS
+
+  """Rcv"""
+  RCV
+
+  """Otr"""
+  OTR
+
+  """Rtrn"""
+  RTRN
 }
 
-"""
-Shipment price type code
-"""
-enum ShipmentPriceTypeCode {
-	"""
-	Excld
-	"""
-	EXCLD
-
-	"""
-	Incld
-	"""
-	INCLD
-}
-
-"""
-Shipment type code
-"""
+"""Shipment type code"""
 enum ShipmentTypeCode {
-	"""
-	Fdp
-	"""
-	FDP
+  """Fdp"""
+  FDP
 
-	"""
-	Pdp
-	"""
-	PDP
+  """Pdp"""
+  PDP
 
-	"""
-	Ptp
-	"""
-	PTP
+  """Ptp"""
+  PTP
 
-	"""
-	Rts
-	"""
-	RTS
-
-	"""
-	Clc
-	"""
-	CLC
+  """Rts"""
+  RTS
 }
 
-input BoxSizeInput {
-	length: Float!
-	width: Float!
-	height: Float!
+type ShippingService {
+	id: Int!
+	code: String!
+	name: String!
+	days: Int!
+	egsCode: String
+	active: Boolean!
+	branch: Branch
+	shipmentTypes: [LookupEntry]
 }
 
-type DropDownEntry {
-	id: Int
-	code: String
-	name: String
+scalar Time
+
+type TransactionType {
+	id: Int!
+	code: String!
+	name: String!
+	active: Boolean!
+	type: LookupEntry
+	sequence: Sequence
+	branch: Branch
 }
 
-input LoginInput {
-	username: String!
-	password: String!
-	rememberMe: Boolean! = true
-	fcmToken: String
-}
-
-type UserWithToken {
-	user: User!
-	token: String!
-	ttl: String!
-}
+scalar Upload
 
 type User {
 	id: Int!
@@ -742,63 +622,31 @@ type User {
 	permissions: [Permission]!
 }
 
-type Role {
-	id: Int!
-	code: String!
-	name: String!
-	permissions: [Permission]!
-	usersCount: Int!
-}
-
-type Permission {
-	id: Int!
-	name: String!
-	slug: String!
-}
-
 type UserBranch {
 	user: User!
 	branch: Branch!
 	default: Boolean!
 }
 
-input ListZonesFilterInput {
-	name: String
-	parentId: Int
-	countryId: Int
-	branchId: Int
-	active: Boolean
-	service: FilterZonesByServiceInput
+type UserWithToken {
+	user: User!
+	token: String!
 }
 
-input FilterZonesByServiceInput {
-	serviceId: Int!
-	customerId: Int
-	customerTypeCode: CustomerTypeCode
-	fromZoneId: Int
-	fromSubzoneId: Int
+type WarehouseSection {
+	id: Int!
+	name: String!
+	branch: Branch!
+	active: Boolean!
+	shipments: [Shipment]
 }
 
-"""
-Customer type code
-"""
-enum CustomerTypeCode {
-	"""
-	Merchant
-	"""
-	MERCHANT
-
-	"""
-	Individual
-	"""
-	INDIVIDUAL
-
-	"""
-	Concierge
-	"""
-	CONCIERGE
-}
-
-input ListLookupEntriesFilterInput {
+type Zone {
+	id: Int!
 	code: String!
+	name: String!
+	parent: Zone
+	active: Boolean
+	branch: Branch
+	children: [Zone]
 }
