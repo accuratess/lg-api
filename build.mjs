@@ -4,6 +4,7 @@
  *
  *   npm install && npm run build
  */
+import crypto from "crypto";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -230,7 +231,14 @@ const nav = `
 const content = sections.map((s) => `<section class="section">${s.html}</section>`).join("\n") + reference.html;
 
 const template = fs.readFileSync(path.join(root, "src", "template.html"), "utf8");
-const page = template.replace("{{nav}}", nav).replace("{{content}}", content).replace("{{year}}", String(new Date().getFullYear()));
+// the styles and script by their content, so a browser never keeps an old copy
+const version = (file) => crypto.createHash("sha1").update(fs.readFileSync(path.join(root, "src", file))).digest("hex").slice(0, 8);
+const page = template
+	.replace("{{nav}}", nav)
+	.replace("{{content}}", content)
+	.replace("{{year}}", String(new Date().getFullYear()))
+	.replace('href="style.css"', `href="style.css?v=${version("style.css")}"`)
+	.replace('src="app.js"', `src="app.js?v=${version("app.js")}"`);
 
 fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
