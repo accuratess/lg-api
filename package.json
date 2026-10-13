@@ -1,0 +1,12 @@
+{
+  "name": "lg-api-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "graphql": "16.14.2",
+    "marked": "18.0.14"
+  }
+}

@@ -1,1 +1,1142 @@
-<script>location.href="/lg-api/english/getting-started";</script><meta http-equiv="refresh" content="0;url=/lg-api/english/getting-started">
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Accurate API</title>
+	<meta name="description" content="Send shipments to your shipping company and get their status updates: the Accurate shipping API.">
+	<link rel="icon" href="Accurate.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+	<script>
+		// the saved theme before the page paints, so it doesn't flash
+		try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+	</script>
+</head>
+<body>
+	<header class="topbar">
+		<button class="menu-toggle" type="button" aria-label="Open the menu" aria-expanded="false">
+			<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+		</button>
+		<a class="brand" href="#getting-started">
+			<img src="Accurate-logistics.png" alt="Accurate" height="28">
+			<span>API</span>
+		</a>
+		<div class="topbar-end">
+			<button class="theme-toggle" type="button" aria-label="Switch between light and dark">
+				<svg class="sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+				<svg class="moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+			</button>
+		</div>
+	</header>
+
+	<div class="layout">
+		<nav class="sidebar" aria-label="Documentation">
+			<input class="search" type="search" placeholder="Search…" aria-label="Search the documentation">
+			
+	<p class="nav-group">Guide</p>
+	<ul><li><a href="#getting-started" data-nav="getting-started">Getting started</a></li><li><a href="#authentication" data-nav="authentication">Authentication</a></li><li><a href="#create-a-shipment" data-nav="create-a-shipment">Create a shipment</a></li><li><a href="#track-shipments" data-nav="track-shipments">Track shipments</a></li><li><a href="#webhooks" data-nav="webhooks">Webhooks</a></li><li><a href="#codes" data-nav="codes">Codes</a></li><li><a href="#errors" data-nav="errors">Errors</a></li><li><a href="#what-changed" data-nav="what-changed">What changed</a></li></ul>
+	<p class="nav-group">API reference</p>
+	<ul>
+		<li><details><summary>Operations</summary><ul><li><a href="#op-calculateShipmentFees" data-nav="op-calculateShipmentFees"><span class="dot query"></span>calculateShipmentFees</a></li><li><a href="#op-listCountriesDropdown" data-nav="op-listCountriesDropdown"><span class="dot query"></span>listCountriesDropdown</a></li><li><a href="#op-listLookupEntriesDropdown" data-nav="op-listLookupEntriesDropdown"><span class="dot query"></span>listLookupEntriesDropdown</a></li><li><a href="#op-listPaymentTypesDropdown" data-nav="op-listPaymentTypesDropdown"><span class="dot query"></span>listPaymentTypesDropdown</a></li><li><a href="#op-listShipments" data-nav="op-listShipments"><span class="dot query"></span>listShipments</a></li><li><a href="#op-listShipmentTypesDropdown" data-nav="op-listShipmentTypesDropdown"><span class="dot query"></span>listShipmentTypesDropdown</a></li><li><a href="#op-listShippingServicesDropdown" data-nav="op-listShippingServicesDropdown"><span class="dot query"></span>listShippingServicesDropdown</a></li><li><a href="#op-listZonesDropdown" data-nav="op-listZonesDropdown"><span class="dot query"></span>listZonesDropdown</a></li><li><a href="#op-login" data-nav="op-login"><span class="dot mutation"></span>login</a></li><li><a href="#op-saveShipment" data-nav="op-saveShipment"><span class="dot mutation"></span>saveShipment</a></li><li><a href="#op-shipment" data-nav="op-shipment"><span class="dot query"></span>shipment</a></li></ul></details></li>
+		<li><details><summary>Types</summary><ul><li><a href="#type-BoxSizeInput" data-nav="type-BoxSizeInput">BoxSizeInput</a></li><li><a href="#type-Branch" data-nav="type-Branch">Branch</a></li><li><a href="#type-CalculateShipmentFeesInput" data-nav="type-CalculateShipmentFeesInput">CalculateShipmentFeesInput</a></li><li><a href="#type-Country" data-nav="type-Country">Country</a></li><li><a href="#type-CustomerTypeCode" data-nav="type-CustomerTypeCode">CustomerTypeCode</a></li><li><a href="#type-DateFilterInput" data-nav="type-DateFilterInput">DateFilterInput</a></li><li><a href="#type-DeliveryAgentCustodyInput" data-nav="type-DeliveryAgentCustodyInput">DeliveryAgentCustodyInput</a></li><li><a href="#type-DropdownEntry" data-nav="type-DropdownEntry">DropdownEntry</a></li><li><a href="#type-FilterZonesByServiceInput" data-nav="type-FilterZonesByServiceInput">FilterZonesByServiceInput</a></li><li><a href="#type-Image" data-nav="type-Image">Image</a></li><li><a href="#type-ImageInput" data-nav="type-ImageInput">ImageInput</a></li><li><a href="#type-ListLookupEntriesFilterInput" data-nav="type-ListLookupEntriesFilterInput">ListLookupEntriesFilterInput</a></li><li><a href="#type-ListPaymentTypesDropdownInput" data-nav="type-ListPaymentTypesDropdownInput">ListPaymentTypesDropdownInput</a></li><li><a href="#type-ListShipmentsFilterInput" data-nav="type-ListShipmentsFilterInput">ListShipmentsFilterInput</a></li><li><a href="#type-ListShippingServicesFilterInput" data-nav="type-ListShippingServicesFilterInput">ListShippingServicesFilterInput</a></li><li><a href="#type-ListZonesFilterInput" data-nav="type-ListZonesFilterInput">ListZonesFilterInput</a></li><li><a href="#type-LoginInput" data-nav="type-LoginInput">LoginInput</a></li><li><a href="#type-Lookup" data-nav="type-Lookup">Lookup</a></li><li><a href="#type-LookupEntry" data-nav="type-LookupEntry">LookupEntry</a></li><li><a href="#type-PaginatorInfo" data-nav="type-PaginatorInfo">PaginatorInfo</a></li><li><a href="#type-Permission" data-nav="type-Permission">Permission</a></li><li><a href="#type-Role" data-nav="type-Role">Role</a></li><li><a href="#type-Sequence" data-nav="type-Sequence">Sequence</a></li><li><a href="#type-Shipment" data-nav="type-Shipment">Shipment</a></li><li><a href="#type-ShipmentDeliveryTypeCode" data-nav="type-ShipmentDeliveryTypeCode">ShipmentDeliveryTypeCode</a></li><li><a href="#type-ShipmentFees" data-nav="type-ShipmentFees">ShipmentFees</a></li><li><a href="#type-ShipmentInput" data-nav="type-ShipmentInput">ShipmentInput</a></li><li><a href="#type-ShipmentOpenableCode" data-nav="type-ShipmentOpenableCode">ShipmentOpenableCode</a></li><li><a href="#type-ShipmentPaginator" data-nav="type-ShipmentPaginator">ShipmentPaginator</a></li><li><a href="#type-ShipmentPaymentTypeCode" data-nav="type-ShipmentPaymentTypeCode">ShipmentPaymentTypeCode</a></li><li><a href="#type-ShipmentPriceTypeCode" data-nav="type-ShipmentPriceTypeCode">ShipmentPriceTypeCode</a></li><li><a href="#type-ShipmentProductInput" data-nav="type-ShipmentProductInput">ShipmentProductInput</a></li><li><a href="#type-ShipmentProductTypeCode" data-nav="type-ShipmentProductTypeCode">ShipmentProductTypeCode</a></li><li><a href="#type-ShipmentReturnTypeCode" data-nav="type-ShipmentReturnTypeCode">ShipmentReturnTypeCode</a></li><li><a href="#type-ShipmentStatusCode" data-nav="type-ShipmentStatusCode">ShipmentStatusCode</a></li><li><a href="#type-ShipmentTypeCode" data-nav="type-ShipmentTypeCode">ShipmentTypeCode</a></li><li><a href="#type-ShippingService" data-nav="type-ShippingService">ShippingService</a></li><li><a href="#type-TransactionType" data-nav="type-TransactionType">TransactionType</a></li><li><a href="#type-User" data-nav="type-User">User</a></li><li><a href="#type-UserBranch" data-nav="type-UserBranch">UserBranch</a></li><li><a href="#type-UserWithToken" data-nav="type-UserWithToken">UserWithToken</a></li><li><a href="#type-WarehouseSection" data-nav="type-WarehouseSection">WarehouseSection</a></li><li><a href="#type-Zone" data-nav="type-Zone">Zone</a></li></ul></details></li>
+	</ul>
+		</nav>
+		<div class="scrim" hidden></div>
+
+		<main class="content">
+			<section class="section"><h1 id="getting-started">Getting started</h1>
+<p>Send shipments to your shipping company straight from your store, ERP or website, and know the moment their status changes.</p>
+<div class="steps"><ol>
+<li><strong><a href="#authentication">Log in</a></strong> once to get a token.</li>
+<li><strong><a href="#create-a-shipment">Create a shipment</a></strong> with one request.</li>
+<li><strong><a href="#webhooks">Get updates</a></strong>: we call your server on every status change, or you <a href="#track-shipments">ask any time</a>.</li>
+</ol>
+</div>
+<h2 id="getting-started-what-you-need"><a class="anchor" href="#getting-started-what-you-need" aria-hidden="true">#</a>What you need</h2>
+<p>Ask your shipping company for:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>API address</strong></td>
+<td><code>https://your-company.com:8443/graphql</code></td>
+</tr>
+<tr>
+<td><strong>Username and password</strong> of your customer account</td>
+<td><code>store@example.com</code></td>
+</tr>
+</tbody></table></div>
+<h2 id="getting-started-how-requests-work"><a class="anchor" href="#getting-started-how-requests-work" aria-hidden="true">#</a>How requests work</h2>
+<p>Every request is a <code>POST</code> to that one address, with a JSON body. The body says <strong>what you want to do</strong> (<code>query</code>) and <strong>the values</strong> you send (<code>variables</code>). The API uses <a href="https://graphql.org/learn/" target="_blank" rel="noopener">GraphQL</a>, but you don&#39;t need to know it: copy the examples in this guide.</p>
+<div class="tabs"><div class="tab-bar"><div class="tab-list" role="tablist"><button type="button" role="tab" aria-selected="true" data-tab="0">cURL</button><button type="button" role="tab" aria-selected="false" data-tab="1">Response</button></div><button class="copy" type="button" aria-label="Copy code">Copy</button></div><div class="tab-panel" role="tabpanel" data-panel="0"><pre><code class="lang-bash"><span class="tok-keyword">curl</span> https://your-company.com:<span class="tok-number">8443</span>/graphql \
+  <span class="tok-flag">-H</span> <span class="tok-string">&quot;Content-Type: application/json&quot;</span> \
+  <span class="tok-flag">-H</span> <span class="tok-string">&quot;Authorization: Bearer YOUR_TOKEN&quot;</span> \
+  <span class="tok-flag">-d</span> <span class="tok-string">'{
+    &quot;query&quot;: &quot;query ($code: String) { shipment(code: $code) { code status { name } } }&quot;,
+    &quot;variables&quot;: { &quot;code&quot;: &quot;A12345&quot; }
+  }'</span></code></pre></div><div class="tab-panel" role="tabpanel" data-panel="1" hidden><pre><code class="lang-json">{
+  <span class="tok-key">&quot;data&quot;</span>: {
+    <span class="tok-key">&quot;shipment&quot;</span>: { <span class="tok-key">&quot;code&quot;</span>: <span class="tok-string">&quot;A12345&quot;</span>, <span class="tok-key">&quot;status&quot;</span>: { <span class="tok-key">&quot;name&quot;</span>: <span class="tok-string">&quot;Out To Deliver&quot;</span> } }
+  }
+}</code></pre></div></div>
+<p>The answer is always JSON. You get back exactly the fields you asked for.</p>
+<h2 id="getting-started-headers"><a class="anchor" href="#getting-started-headers" aria-hidden="true">#</a>Headers</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Content-Type</code></td>
+<td><code>application/json</code></td>
+<td>Required</td>
+</tr>
+<tr>
+<td><code>Authorization</code></td>
+<td><code>Bearer YOUR_TOKEN</code></td>
+<td>Required, except to log in</td>
+</tr>
+<tr>
+<td><code>Content-Language</code></td>
+<td><code>en</code> or <code>ar</code>, the language of status and zone names</td>
+<td>Optional</td>
+</tr>
+</tbody></table></div>
+<div class="callout"><p><strong>Postman</strong> and <strong>Insomnia</strong> make testing easy: choose <em>GraphQL</em> as the body type, then paste the query and the variables from this guide.</p>
+</div>
+</section>
+<section class="section"><h1 id="authentication">Authentication</h1>
+<p>Log in <strong>once</strong> with your username and password to get a <strong>token</strong>, then send that token with every request.</p>
+<h2 id="authentication-log-in"><a class="anchor" href="#authentication-log-in" aria-hidden="true">#</a>Log in</h2>
+<div class="tabs"><div class="tab-bar"><div class="tab-list" role="tablist"><button type="button" role="tab" aria-selected="true" data-tab="0">Query</button><button type="button" role="tab" aria-selected="false" data-tab="1">Variables</button><button type="button" role="tab" aria-selected="false" data-tab="2">Response</button><button type="button" role="tab" aria-selected="false" data-tab="3">cURL</button><button type="button" role="tab" aria-selected="false" data-tab="4">JavaScript</button><button type="button" role="tab" aria-selected="false" data-tab="5">PHP</button></div><button class="copy" type="button" aria-label="Copy code">Copy</button></div><div class="tab-panel" role="tabpanel" data-panel="0"><pre><code class="lang-graphql"><span class="tok-keyword">mutation</span> Login(<span class="tok-variable">$input</span>: LoginInput!) {
+  login(input: <span class="tok-variable">$input</span>) {
+    token
+  }
+}</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="1" hidden><pre><code class="lang-json">{
+  <span class="tok-key">&quot;input&quot;</span>: {
+    <span class="tok-key">&quot;username&quot;</span>: <span class="tok-string">&quot;store@example.com&quot;</span>,
+    <span class="tok-key">&quot;password&quot;</span>: <span class="tok-string">&quot;your-password&quot;</span>
+  }
+}</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="2" hidden><pre><code class="lang-json">{
+  <span class="tok-key">&quot;data&quot;</span>: {
+    <span class="tok-key">&quot;login&quot;</span>: { <span class="tok-key">&quot;token&quot;</span>: <span class="tok-string">&quot;3|kD8f2...x91&quot;</span> }
+  }
+}</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="3" hidden><pre><code class="lang-bash"><span class="tok-keyword">curl</span> https://your-company.com:<span class="tok-number">8443</span>/graphql \
+  <span class="tok-flag">-H</span> <span class="tok-string">&quot;Content-Type: application/json&quot;</span> \
+  <span class="tok-flag">-d</span> <span class="tok-string">'{
+    &quot;query&quot;: &quot;mutation ($input: LoginInput!) { login(input: $input) { token } }&quot;,
+    &quot;variables&quot;: { &quot;input&quot;: { &quot;username&quot;: &quot;store@example.com&quot;, &quot;password&quot;: &quot;your-password&quot; } }
+  }'</span></code></pre></div><div class="tab-panel" role="tabpanel" data-panel="4" hidden><pre><code class="lang-js"><span class="tok-keyword">const</span> response = <span class="tok-keyword">await</span> fetch(<span class="tok-string">&quot;https://your-company.com:8443/graphql&quot;</span>, {
+  method: <span class="tok-string">&quot;POST&quot;</span>,
+  headers: { <span class="tok-string">&quot;Content-Type&quot;</span>: <span class="tok-string">&quot;application/json&quot;</span> },
+  body: JSON.stringify({
+    query: <span class="tok-string">&quot;mutation ($input: LoginInput!) { login(input: $input) { token } }&quot;</span>,
+    variables: { input: { username: <span class="tok-string">&quot;store@example.com&quot;</span>, password: <span class="tok-string">&quot;your-password&quot;</span> } },
+  }),
+});
+<span class="tok-keyword">const</span> { data } = <span class="tok-keyword">await</span> response.json();
+<span class="tok-keyword">const</span> token = data.login.token;</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="5" hidden><pre><code class="lang-php"><span class="tok-variable">$response</span> = Http::post(<span class="tok-string">'https://your-company.com:8443/graphql'</span>, [
+    <span class="tok-string">'query'</span> =&gt; <span class="tok-string">'mutation ($input: LoginInput!) { login(input: $input) { token } }'</span>,
+    <span class="tok-string">'variables'</span> =&gt; [<span class="tok-string">'input'</span> =&gt; [<span class="tok-string">'username'</span> =&gt; <span class="tok-string">'store@example.com'</span>, <span class="tok-string">'password'</span> =&gt; <span class="tok-string">'your-password'</span>]],
+]);
+<span class="tok-variable">$token</span> = <span class="tok-variable">$response</span>-&gt;json(<span class="tok-string">'data.login.token'</span>);</code></pre></div></div>
+<h2 id="authentication-use-the-token"><a class="anchor" href="#authentication-use-the-token" aria-hidden="true">#</a>Use the token</h2>
+<p>Send it in the <code>Authorization</code> header of every request, after <code>Bearer </code>:</p>
+<div class="code"><div class="code-head"><span>Text</span><button class="copy" type="button" aria-label="Copy code">Copy</button></div><pre><code class="lang-text">Authorization: Bearer <span class="tok-number">3</span>|kD8f2...x91</code></pre></div>
+<div class="callout"><p><strong>Keep the token on your server</strong>, like a password. Reuse it: log in again only when a request answers <code>Unauthenticated.</code></p>
+</div>
+</section>
+<section class="section"><h1 id="create-a-shipment">Create a shipment</h1>
+<p>A shipment needs three <strong>ids</strong>: the shipping service, the recipient&#39;s zone (city) and subzone (area). Look them up once and save them in your system; they rarely change. Then creating a shipment is a single request.</p>
+<h2 id="create-a-shipment-1-get-the-shipping-services"><a class="anchor" href="#create-a-shipment-1-get-the-shipping-services" aria-hidden="true">#</a>1. Get the shipping services</h2>
+<div class="tabs"><div class="tab-bar"><div class="tab-list" role="tablist"><button type="button" role="tab" aria-selected="true" data-tab="0">Query</button><button type="button" role="tab" aria-selected="false" data-tab="1">Response</button></div><button class="copy" type="button" aria-label="Copy code">Copy</button></div><div class="tab-panel" role="tabpanel" data-panel="0"><pre><code class="lang-graphql"><span class="tok-keyword">query</span> Services {
+  listShippingServicesDropdown(input: { active: <span class="tok-keyword">true</span> }) {
+    id
+    name
+  }
+}</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="1" hidden><pre><code class="lang-json">{
+  <span class="tok-key">&quot;data&quot;</span>: {
+    <span class="tok-key">&quot;listShippingServicesDropdown&quot;</span>: [
+      { <span class="tok-key">&quot;id&quot;</span>: <span class="tok-number">1</span>, <span class="tok-key">&quot;name&quot;</span>: <span class="tok-string">&quot;Standard&quot;</span> },
+      { <span class="tok-key">&quot;id&quot;</span>: <span class="tok-number">4</span>, <span class="tok-key">&quot;name&quot;</span>: <span class="tok-string">&quot;Same day&quot;</span> }
+    ]
+  }
+}</code></pre></div></div>
+<h2 id="create-a-shipment-2-get-the-zones-and-subzones"><a class="anchor" href="#create-a-shipment-2-get-the-zones-and-subzones" aria-hidden="true">#</a>2. Get the zones and subzones</h2>
+<p>The zones the service delivers to:</p>
+<div class="tabs"><div class="tab-bar"><div class="tab-list" role="tablist"><button type="button" role="tab" aria-selected="true" data-tab="0">Query</button><button type="button" role="tab" aria-selected="false" data-tab="1">Variables</button></div><button class="copy" type="button" aria-label="Copy code">Copy</button></div><div class="tab-panel" role="tabpanel" data-panel="0"><pre><code class="lang-graphql"><span class="tok-keyword">query</span> Zones(<span class="tok-variable">$serviceId</span>: Int!) {
+  listZonesDropdown(input: { active: <span class="tok-keyword">true</span>, service: { serviceId: <span class="tok-variable">$serviceId</span> } }) {
+    id
+    name
+  }
+}</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="1" hidden><pre><code class="lang-json">{ <span class="tok-key">&quot;serviceId&quot;</span>: <span class="tok-number">1</span> }</code></pre></div></div>
+<p>Then the subzones inside a zone:</p>
+<div class="tabs"><div class="tab-bar"><div class="tab-list" role="tablist"><button type="button" role="tab" aria-selected="true" data-tab="0">Query</button><button type="button" role="tab" aria-selected="false" data-tab="1">Variables</button></div><button class="copy" type="button" aria-label="Copy code">Copy</button></div><div class="tab-panel" role="tabpanel" data-panel="0"><pre><code class="lang-graphql"><span class="tok-keyword">query</span> Subzones(<span class="tok-variable">$zoneId</span>: Int!) {
+  listZonesDropdown(input: { active: <span class="tok-keyword">true</span>, parentId: <span class="tok-variable">$zoneId</span> }) {
+    id
+    name
+  }
+}</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="1" hidden><pre><code class="lang-json">{ <span class="tok-key">&quot;zoneId&quot;</span>: <span class="tok-number">12</span> }</code></pre></div></div>
+<h2 id="create-a-shipment-3-create-the-shipment"><a class="anchor" href="#create-a-shipment-3-create-the-shipment" aria-hidden="true">#</a>3. Create the shipment</h2>
+<div class="tabs"><div class="tab-bar"><div class="tab-list" role="tablist"><button type="button" role="tab" aria-selected="true" data-tab="0">Query</button><button type="button" role="tab" aria-selected="false" data-tab="1">Variables</button><button type="button" role="tab" aria-selected="false" data-tab="2">Response</button><button type="button" role="tab" aria-selected="false" data-tab="3">JavaScript</button><button type="button" role="tab" aria-selected="false" data-tab="4">PHP</button></div><button class="copy" type="button" aria-label="Copy code">Copy</button></div><div class="tab-panel" role="tabpanel" data-panel="0"><pre><code class="lang-graphql"><span class="tok-keyword">mutation</span> CreateShipment(<span class="tok-variable">$input</span>: ShipmentInput!) {
+  saveShipment(input: <span class="tok-variable">$input</span>) {
+    id
+    code
+    trackingUrl
+    status { code name }
+  }
+}</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="1" hidden><pre><code class="lang-json">{
+  <span class="tok-key">&quot;input&quot;</span>: {
+    <span class="tok-key">&quot;serviceId&quot;</span>: <span class="tok-number">1</span>,
+    <span class="tok-key">&quot;refNumber&quot;</span>: <span class="tok-string">&quot;ORDER-1001&quot;</span>,
+    <span class="tok-key">&quot;recipientName&quot;</span>: <span class="tok-string">&quot;Ahmed Ali&quot;</span>,
+    <span class="tok-key">&quot;recipientMobile&quot;</span>: <span class="tok-string">&quot;01012345678&quot;</span>,
+    <span class="tok-key">&quot;recipientZoneId&quot;</span>: <span class="tok-number">12</span>,
+    <span class="tok-key">&quot;recipientSubzoneId&quot;</span>: <span class="tok-number">140</span>,
+    <span class="tok-key">&quot;recipientAddress&quot;</span>: <span class="tok-string">&quot;12 Nile St, building 4, floor 2&quot;</span>,
+    <span class="tok-key">&quot;description&quot;</span>: <span class="tok-string">&quot;2 T-shirts&quot;</span>,
+    <span class="tok-key">&quot;weight&quot;</span>: <span class="tok-number">1.5</span>,
+    <span class="tok-key">&quot;piecesCount&quot;</span>: <span class="tok-number">1</span>,
+    <span class="tok-key">&quot;price&quot;</span>: <span class="tok-number">250</span>,
+    <span class="tok-key">&quot;priceTypeCode&quot;</span>: <span class="tok-string">&quot;INCLD&quot;</span>,
+    <span class="tok-key">&quot;paymentTypeCode&quot;</span>: <span class="tok-string">&quot;COLC&quot;</span>,
+    <span class="tok-key">&quot;openableCode&quot;</span>: <span class="tok-string">&quot;Y&quot;</span>,
+    <span class="tok-key">&quot;notes&quot;</span>: <span class="tok-string">&quot;Call before delivery&quot;</span>
+  }
+}</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="2" hidden><pre><code class="lang-json">{
+  <span class="tok-key">&quot;data&quot;</span>: {
+    <span class="tok-key">&quot;saveShipment&quot;</span>: {
+      <span class="tok-key">&quot;id&quot;</span>: <span class="tok-number">10832354</span>,
+      <span class="tok-key">&quot;code&quot;</span>: <span class="tok-string">&quot;A12345&quot;</span>,
+      <span class="tok-key">&quot;trackingUrl&quot;</span>: <span class="tok-string">&quot;https://your-company.com/track/A12345&quot;</span>,
+      <span class="tok-key">&quot;status&quot;</span>: { <span class="tok-key">&quot;code&quot;</span>: <span class="tok-string">&quot;PKR&quot;</span>, <span class="tok-key">&quot;name&quot;</span>: <span class="tok-string">&quot;Shipping Request&quot;</span> }
+    }
+  }
+}</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="3" hidden><pre><code class="lang-js"><span class="tok-keyword">const</span> response = <span class="tok-keyword">await</span> fetch(<span class="tok-string">&quot;https://your-company.com:8443/graphql&quot;</span>, {
+  method: <span class="tok-string">&quot;POST&quot;</span>,
+  headers: {
+    <span class="tok-string">&quot;Content-Type&quot;</span>: <span class="tok-string">&quot;application/json&quot;</span>,
+    Authorization: <span class="tok-string">`Bearer ${token}`</span>,
+  },
+  body: JSON.stringify({
+    query: <span class="tok-string">`mutation ($input: ShipmentInput!) {
+      saveShipment(input: $input) { id code trackingUrl }
+    }`</span>,
+    variables: {
+      input: {
+        serviceId: <span class="tok-number">1</span>,
+        refNumber: <span class="tok-string">&quot;ORDER-1001&quot;</span>,
+        recipientName: <span class="tok-string">&quot;Ahmed Ali&quot;</span>,
+        recipientMobile: <span class="tok-string">&quot;01012345678&quot;</span>,
+        recipientZoneId: <span class="tok-number">12</span>,
+        recipientSubzoneId: <span class="tok-number">140</span>,
+        recipientAddress: <span class="tok-string">&quot;12 Nile St, building 4, floor 2&quot;</span>,
+        price: <span class="tok-number">250</span>,
+      },
+    },
+  }),
+});
+<span class="tok-keyword">const</span> { data, errors } = <span class="tok-keyword">await</span> response.json();</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="4" hidden><pre><code class="lang-php"><span class="tok-variable">$response</span> = Http::withToken(<span class="tok-variable">$token</span>)-&gt;post(<span class="tok-string">'https://your-company.com:8443/graphql'</span>, [
+    <span class="tok-string">'query'</span> =&gt; <span class="tok-string">'mutation ($input: ShipmentInput!) { saveShipment(input: $input) { id code trackingUrl } }'</span>,
+    <span class="tok-string">'variables'</span> =&gt; [<span class="tok-string">'input'</span> =&gt; [
+        <span class="tok-string">'serviceId'</span> =&gt; <span class="tok-number">1</span>,
+        <span class="tok-string">'refNumber'</span> =&gt; <span class="tok-string">'ORDER-1001'</span>,
+        <span class="tok-string">'recipientName'</span> =&gt; <span class="tok-string">'Ahmed Ali'</span>,
+        <span class="tok-string">'recipientMobile'</span> =&gt; <span class="tok-string">'01012345678'</span>,
+        <span class="tok-string">'recipientZoneId'</span> =&gt; <span class="tok-number">12</span>,
+        <span class="tok-string">'recipientSubzoneId'</span> =&gt; <span class="tok-number">140</span>,
+        <span class="tok-string">'recipientAddress'</span> =&gt; <span class="tok-string">'12 Nile St, building 4, floor 2'</span>,
+        <span class="tok-string">'price'</span> =&gt; <span class="tok-number">250</span>,
+    ]],
+]);
+<span class="tok-variable">$shipment</span> = <span class="tok-variable">$response</span>-&gt;json(<span class="tok-string">'data.saveShipment'</span>);</code></pre></div></div>
+<p>Save the <code>id</code> and <code>code</code>: you&#39;ll need them to <a href="#track-shipments">track</a> the shipment, and every <a href="#webhooks">webhook</a> includes them.</p>
+<h2 id="create-a-shipment-fields"><a class="anchor" href="#create-a-shipment-fields" aria-hidden="true">#</a>Fields</h2>
+<p><strong>Required</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>serviceId</code></td>
+<td>Shipping service, from step 1</td>
+</tr>
+<tr>
+<td><code>recipientZoneId</code>, <code>recipientSubzoneId</code></td>
+<td>Zone and subzone, from step 2</td>
+</tr>
+<tr>
+<td><code>recipientMobile</code></td>
+<td>Recipient&#39;s mobile number</td>
+</tr>
+<tr>
+<td><code>recipientAddress</code></td>
+<td>Full delivery address</td>
+</tr>
+</tbody></table></div>
+<p><strong>Optional, most used</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>refNumber</code></td>
+<td><strong>Your order number.</strong> Recommended: you can search by it</td>
+</tr>
+<tr>
+<td><code>recipientName</code>, <code>recipientPhone</code></td>
+<td>Name and a second number</td>
+</tr>
+<tr>
+<td><code>price</code></td>
+<td>What the courier collects from the recipient (<code>0</code> if prepaid)</td>
+</tr>
+<tr>
+<td><code>priceTypeCode</code></td>
+<td><code>INCLD</code>: price includes shipping fees · <code>EXCLD</code>: fees are added</td>
+</tr>
+<tr>
+<td><code>paymentTypeCode</code></td>
+<td><code>COLC</code> collect on delivery · <code>PAID</code> prepaid · <a href="#codes">more</a></td>
+</tr>
+<tr>
+<td><code>typeCode</code></td>
+<td><code>FDP</code> deliver (default) · <code>PDP</code> partial · <code>PTP</code> exchange · <code>RTS</code> pick up a return</td>
+</tr>
+<tr>
+<td><code>openableCode</code></td>
+<td><code>Y</code> / <code>N</code>: may the recipient open it before paying?</td>
+</tr>
+<tr>
+<td><code>description</code>, <code>notes</code></td>
+<td>What&#39;s inside, and notes for the courier</td>
+</tr>
+<tr>
+<td><code>weight</code>, <code>piecesCount</code>, <code>size</code></td>
+<td>Kilograms, pieces, <code>{ length, width, height }</code> in cm</td>
+</tr>
+<tr>
+<td><code>deliveryDate</code></td>
+<td>Requested date, <code>YYYY-MM-DD</code></td>
+</tr>
+<tr>
+<td><code>senderName</code>, <code>senderMobile</code>, <code>senderAddress</code>, <code>senderZoneId</code>, <code>senderSubzoneId</code></td>
+<td>Pickup details, if not your account&#39;s</td>
+</tr>
+</tbody></table></div>
+<p>Every field is in the <a href="#type-ShipmentInput">reference</a>.</p>
+<div class="callout"><p><strong>To change a shipment</strong>, send <code>saveShipment</code> again with its <code>id</code> and the fields to change. That works until the shipping company starts handling it: the shipment&#39;s <code>editable</code> field tells you.</p>
+</div>
+</section>
+<section class="section"><h1 id="track-shipments">Track shipments</h1>
+<div class="callout"><p><strong>Prefer <a href="#webhooks">webhooks</a></strong>: we tell you as soon as a status changes, so you don&#39;t have to ask.</p>
+</div>
+<h2 id="track-shipments-one-shipment"><a class="anchor" href="#track-shipments-one-shipment" aria-hidden="true">#</a>One shipment</h2>
+<div class="tabs"><div class="tab-bar"><div class="tab-list" role="tablist"><button type="button" role="tab" aria-selected="true" data-tab="0">Query</button><button type="button" role="tab" aria-selected="false" data-tab="1">Variables</button></div><button class="copy" type="button" aria-label="Copy code">Copy</button></div><div class="tab-panel" role="tabpanel" data-panel="0"><pre><code class="lang-graphql"><span class="tok-keyword">query</span> Track(<span class="tok-variable">$code</span>: String) {
+  shipment(code: <span class="tok-variable">$code</span>) {
+    code
+    refNumber
+    status { code name }
+    deliveredOrReturnedDate
+    deliveredAmount
+    trackingUrl
+  }
+}</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="1" hidden><pre><code class="lang-json">{ <span class="tok-key">&quot;code&quot;</span>: <span class="tok-string">&quot;A12345&quot;</span> }</code></pre></div></div>
+<p><code>status.code</code> is one of the <a href="#codes">status codes</a>; <code>status.name</code> is its name in the <code>Content-Language</code> you asked for.</p>
+<h2 id="track-shipments-many-shipments"><a class="anchor" href="#track-shipments-many-shipments" aria-hidden="true">#</a>Many shipments</h2>
+<div class="tabs"><div class="tab-bar"><div class="tab-list" role="tablist"><button type="button" role="tab" aria-selected="true" data-tab="0">Query</button><button type="button" role="tab" aria-selected="false" data-tab="1">Variables</button></div><button class="copy" type="button" aria-label="Copy code">Copy</button></div><div class="tab-panel" role="tabpanel" data-panel="0"><pre><code class="lang-graphql"><span class="tok-keyword">query</span> MyShipments(<span class="tok-variable">$input</span>: ListShipmentsFilterInput, <span class="tok-variable">$page</span>: Int) {
+  listShipments(input: <span class="tok-variable">$input</span>, first: <span class="tok-number">50</span>, page: <span class="tok-variable">$page</span>) {
+    paginatorInfo { currentPage lastPage total hasMorePages }
+    data {
+      code
+      refNumber
+      status { code name }
+    }
+  }
+}</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="1" hidden><pre><code class="lang-json">{
+  <span class="tok-key">&quot;input&quot;</span>: {
+    <span class="tok-key">&quot;date&quot;</span>: { <span class="tok-key">&quot;fromDate&quot;</span>: <span class="tok-string">&quot;2026-10-01&quot;</span>, <span class="tok-key">&quot;toDate&quot;</span>: <span class="tok-string">&quot;2026-10-13&quot;</span> },
+    <span class="tok-key">&quot;statusCode&quot;</span>: [<span class="tok-string">&quot;OTD&quot;</span>, <span class="tok-string">&quot;DEX&quot;</span>, <span class="tok-string">&quot;HTR&quot;</span>]
+  },
+  <span class="tok-key">&quot;page&quot;</span>: <span class="tok-number">1</span>
+}</code></pre></div></div>
+<p>Up to <strong>100</strong> per page (<code>first</code>). Ask for the next <code>page</code> while <code>hasMorePages</code> is <code>true</code>.</p>
+<h2 id="track-shipments-filters"><a class="anchor" href="#track-shipments-filters" aria-hidden="true">#</a>Filters</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Example</th>
+<th>Finds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>code</code></td>
+<td><code>[&quot;A12345&quot;]</code></td>
+<td>These shipment codes</td>
+</tr>
+<tr>
+<td><code>refNumber</code></td>
+<td><code>[&quot;ORDER-1001&quot;]</code></td>
+<td>Your order numbers</td>
+</tr>
+<tr>
+<td><code>search</code></td>
+<td><code>&quot;01012345678&quot;</code></td>
+<td>Part of the code, or a recipient&#39;s or sender&#39;s name or phone</td>
+</tr>
+<tr>
+<td><code>statusCode</code></td>
+<td><code>[&quot;DTR&quot;]</code></td>
+<td>In these <a href="#codes">statuses</a></td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td><code>{ &quot;fromDate&quot;: &quot;2026-10-01&quot; }</code></td>
+<td>Created in this period</td>
+</tr>
+<tr>
+<td><code>deliveredOrReturnedDate</code></td>
+<td><code>{ &quot;fromDays&quot;: 7 }</code></td>
+<td>Delivered or returned in the last 7 days</td>
+</tr>
+<tr>
+<td><code>delivered</code>, <code>notDelivered</code></td>
+<td><code>true</code></td>
+<td>Delivered, or not yet</td>
+</tr>
+</tbody></table></div>
+<p>All filters are in the <a href="#type-ListShipmentsFilterInput">reference</a>.</p>
+</section>
+<section class="section"><h1 id="webhooks">Webhooks</h1>
+<p>Every time one of your shipments changes status, we send a <code>POST</code> to an address on your server. No need to keep asking.</p>
+<div class="steps"><ol>
+<li><strong>Make an address</strong> on your server that accepts a JSON <code>POST</code>, like <code>https://your-store.com/accurate/webhook</code>.</li>
+<li><strong>Send it to your shipping company</strong>: they save it on your account.</li>
+<li><strong>Answer <code>200</code></strong> as soon as a request arrives, then update the shipment in your system.</li>
+</ol>
+</div>
+<h2 id="webhooks-what-you-receive"><a class="anchor" href="#webhooks-what-you-receive" aria-hidden="true">#</a>What you receive</h2>
+<div class="tabs"><div class="tab-bar"><div class="tab-list" role="tablist"><button type="button" role="tab" aria-selected="true" data-tab="0">Body</button><button type="button" role="tab" aria-selected="false" data-tab="1">Headers</button><button type="button" role="tab" aria-selected="false" data-tab="2">Example handler</button></div><button class="copy" type="button" aria-label="Copy code">Copy</button></div><div class="tab-panel" role="tabpanel" data-panel="0"><pre><code class="lang-json">{
+  <span class="tok-key">&quot;shipmentId&quot;</span>: <span class="tok-number">10832354</span>,
+  <span class="tok-key">&quot;shipmentCode&quot;</span>: <span class="tok-string">&quot;A12345&quot;</span>,
+  <span class="tok-key">&quot;typeCode&quot;</span>: <span class="tok-string">&quot;SHP_STATUS_UPDATE&quot;</span>,
+  <span class="tok-key">&quot;shipmentStatusCode&quot;</span>: <span class="tok-string">&quot;DTR&quot;</span>,
+  <span class="tok-key">&quot;deliveryTypeCode&quot;</span>: <span class="tok-string">&quot;FD&quot;</span>,
+  <span class="tok-key">&quot;returnTypeCode&quot;</span>: null,
+  <span class="tok-key">&quot;deliveredAmount&quot;</span>: <span class="tok-number">250</span>,
+  <span class="tok-key">&quot;collectedFees&quot;</span>: <span class="tok-number">0</span>,
+  <span class="tok-key">&quot;deliveryDate&quot;</span>: <span class="tok-string">&quot;2026-10-13&quot;</span>,
+  <span class="tok-key">&quot;cancellationReasonId&quot;</span>: null,
+  <span class="tok-key">&quot;notes&quot;</span>: <span class="tok-string">&quot;Delivered to the security guard&quot;</span>
+}</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="1" hidden><pre><code class="lang-text">POST /accurate/webhook
+Content-Type: application/json
+X-Client-Id: telegraph</code></pre></div><div class="tab-panel" role="tabpanel" data-panel="2" hidden><pre><code class="lang-js"><span class="tok-comment">// Express</span>
+app.post(<span class="tok-string">&quot;/accurate/webhook&quot;</span>, express.json(), <span class="tok-keyword">async</span> (req, res) =&gt; {
+  res.sendStatus(<span class="tok-number">200</span>); <span class="tok-comment">// answer first</span>
+
+  <span class="tok-keyword">const</span> { shipmentCode, shipmentStatusCode } = req.body;
+  <span class="tok-keyword">await</span> orders.updateByShipmentCode(shipmentCode, { status: shipmentStatusCode });
+});</code></pre></div></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>shipmentId</code>, <code>shipmentCode</code></td>
+<td>The shipment, as <code>saveShipment</code> returned it</td>
+</tr>
+<tr>
+<td><code>shipmentStatusCode</code></td>
+<td><strong>The new status</strong>: see <a href="#codes">codes</a></td>
+</tr>
+<tr>
+<td><code>deliveryTypeCode</code></td>
+<td>When delivered: <code>FD</code> fully, <code>PD</code> partially</td>
+</tr>
+<tr>
+<td><code>returnTypeCode</code></td>
+<td>When returned: how the fees were settled, see <a href="#codes">codes</a></td>
+</tr>
+<tr>
+<td><code>deliveredAmount</code></td>
+<td>Collected from the recipient</td>
+</tr>
+<tr>
+<td><code>collectedFees</code></td>
+<td>Shipping fees collected from the recipient</td>
+</tr>
+<tr>
+<td><code>deliveryDate</code></td>
+<td>Delivery date</td>
+</tr>
+<tr>
+<td><code>cancellationReasonId</code></td>
+<td>Why it couldn&#39;t be delivered, if given</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td>The courier&#39;s notes</td>
+</tr>
+<tr>
+<td><code>typeCode</code></td>
+<td>Always <code>SHP_STATUS_UPDATE</code></td>
+</tr>
+<tr>
+<td><code>X-Client-Id</code> header</td>
+<td>Your shipping company&#39;s name, if you work with several</td>
+</tr>
+</tbody></table></div>
+<p>Fields that don&#39;t apply to the status are <code>null</code>.</p>
+<div class="callout"><p>The same update can arrive twice. Saving the same status again should do no harm.</p>
+</div>
+</section>
+<section class="section"><h1 id="codes">Codes</h1>
+<h2 id="codes-shipment-status"><a class="anchor" href="#codes-shipment-status" aria-hidden="true">#</a>Shipment status</h2>
+<p>In the order a shipment usually goes through them.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PKR</code></td>
+<td>Shipping request</td>
+<td>Created, waiting for pickup</td>
+</tr>
+<tr>
+<td><code>PKM</code></td>
+<td>Picking up</td>
+<td>A courier is on the way to pick it up</td>
+</tr>
+<tr>
+<td><code>PKH</code></td>
+<td>Pickup rescheduled</td>
+<td>Pickup will be tried again</td>
+</tr>
+<tr>
+<td><code>PKD</code></td>
+<td>Picked up</td>
+<td>Picked up from you</td>
+</tr>
+<tr>
+<td><code>RJCT</code></td>
+<td>Rejected</td>
+<td>Refused by the shipping company</td>
+</tr>
+<tr>
+<td><code>RITS</code></td>
+<td>In the warehouse</td>
+<td>At the shipping company&#39;s warehouse</td>
+</tr>
+<tr>
+<td><code>PRP</code></td>
+<td>Being prepared</td>
+<td>Being packed</td>
+</tr>
+<tr>
+<td><code>PRPD</code></td>
+<td>Prepared</td>
+<td>Ready to go out</td>
+</tr>
+<tr>
+<td><code>BMT</code></td>
+<td>Sent to another branch</td>
+<td>Moving between branches</td>
+</tr>
+<tr>
+<td><code>BMR</code></td>
+<td>Arrived at the branch</td>
+<td>At the branch that delivers it</td>
+</tr>
+<tr>
+<td><code>STD</code></td>
+<td>Handing to courier</td>
+<td>Being given to the delivery courier</td>
+</tr>
+<tr>
+<td><code>OTD</code></td>
+<td>Out for delivery</td>
+<td>On the way to the recipient</td>
+</tr>
+<tr>
+<td><code>DTR</code></td>
+<td><strong>Delivered</strong></td>
+<td>See <code>deliveryTypeCode</code></td>
+</tr>
+<tr>
+<td><code>DEX</code></td>
+<td>Delivery failed</td>
+<td>Not delivered this time, see <code>cancellationReasonId</code></td>
+</tr>
+<tr>
+<td><code>HTR</code></td>
+<td>Waiting to redeliver</td>
+<td>Will be delivered again later</td>
+</tr>
+<tr>
+<td><code>RTS</code></td>
+<td>Returning</td>
+<td>Will come back to you</td>
+</tr>
+<tr>
+<td><code>RCV</code></td>
+<td>Return in the warehouse</td>
+<td>Back at the warehouse</td>
+</tr>
+<tr>
+<td><code>OTR</code></td>
+<td>Out for return</td>
+<td>On the way back to you</td>
+</tr>
+<tr>
+<td><code>RTRN</code></td>
+<td><strong>Returned</strong></td>
+<td>Back with you, see <code>returnTypeCode</code></td>
+</tr>
+</tbody></table></div>
+<h2 id="codes-delivery-type"><a class="anchor" href="#codes-delivery-type" aria-hidden="true">#</a>Delivery type</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Code</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>FD</code></td>
+<td>Fully delivered</td>
+</tr>
+<tr>
+<td><code>PD</code></td>
+<td>Partially delivered: the rest comes back</td>
+</tr>
+</tbody></table></div>
+<h2 id="codes-return-type"><a class="anchor" href="#codes-return-type" aria-hidden="true">#</a>Return type</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Code</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>WODF</code></td>
+<td>Returned, you pay no fees</td>
+</tr>
+<tr>
+<td><code>WFDF</code></td>
+<td>Returned, you pay the full shipping fees</td>
+</tr>
+<tr>
+<td><code>WPDF</code></td>
+<td>Returned, you pay part of the shipping fees</td>
+</tr>
+<tr>
+<td><code>FFC</code></td>
+<td>Returned, the recipient paid the full shipping fees</td>
+</tr>
+<tr>
+<td><code>FPC</code></td>
+<td>Returned, the recipient paid part of the shipping fees</td>
+</tr>
+<tr>
+<td><code>PRTS</code></td>
+<td>Partially returned</td>
+</tr>
+</tbody></table></div>
+<h2 id="codes-shipment-type"><a class="anchor" href="#codes-shipment-type" aria-hidden="true">#</a>Shipment type</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Code</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>FDP</code></td>
+<td>Deliver the whole package (default)</td>
+</tr>
+<tr>
+<td><code>PDP</code></td>
+<td>The recipient may keep only part of it</td>
+</tr>
+<tr>
+<td><code>PTP</code></td>
+<td>Exchange: deliver one package, bring another back</td>
+</tr>
+<tr>
+<td><code>RTS</code></td>
+<td>Pick up a package from the recipient for you</td>
+</tr>
+</tbody></table></div>
+<h2 id="codes-payment-type"><a class="anchor" href="#codes-payment-type" aria-hidden="true">#</a>Payment type</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Code</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>COLC</code></td>
+<td>Collect from the recipient on delivery</td>
+</tr>
+<tr>
+<td><code>PAID</code></td>
+<td>Prepaid</td>
+</tr>
+<tr>
+<td><code>CASH</code></td>
+<td>Paid in cash</td>
+</tr>
+<tr>
+<td><code>CRDT</code></td>
+<td>Postpaid, settled with you later</td>
+</tr>
+<tr>
+<td><code>VISA</code></td>
+<td>Paid by card</td>
+</tr>
+</tbody></table></div>
+<h2 id="codes-price-type-and-open-package"><a class="anchor" href="#codes-price-type-and-open-package" aria-hidden="true">#</a>Price type and open package</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Code</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>INCLD</code></td>
+<td><code>price</code> includes the shipping fees</td>
+</tr>
+<tr>
+<td><code>EXCLD</code></td>
+<td>Shipping fees are added to <code>price</code></td>
+</tr>
+<tr>
+<td><code>Y</code></td>
+<td>The recipient may open the package before paying</td>
+</tr>
+<tr>
+<td><code>N</code></td>
+<td>The recipient may not open it</td>
+</tr>
+</tbody></table></div>
+</section>
+<section class="section"><h1 id="errors">Errors</h1>
+<p>A failed request has an <code>errors</code> list. The HTTP status is usually still <code>200</code>, so <strong>always check for <code>errors</code></strong>.</p>
+<div class="code"><div class="code-head"><span>Response</span><button class="copy" type="button" aria-label="Copy code">Copy</button></div><pre><code class="lang-json">{
+  <span class="tok-key">&quot;errors&quot;</span>: [
+    {
+      <span class="tok-key">&quot;message&quot;</span>: <span class="tok-string">&quot;Validation failed for the field [saveShipment].&quot;</span>,
+      <span class="tok-key">&quot;extensions&quot;</span>: {
+        <span class="tok-key">&quot;validation&quot;</span>: {
+          <span class="tok-key">&quot;input.recipientMobile&quot;</span>: [<span class="tok-string">&quot;The recipient mobile field is required.&quot;</span>]
+        }
+      }
+    }
+  ],
+  <span class="tok-key">&quot;data&quot;</span>: { <span class="tok-key">&quot;saveShipment&quot;</span>: null }
+}</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Message</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Unauthenticated.</code></td>
+<td><a href="#authentication">Log in</a> again and retry</td>
+</tr>
+<tr>
+<td><code>Validation failed…</code></td>
+<td><code>extensions.validation</code> lists each wrong field and why</td>
+</tr>
+<tr>
+<td><code>Variable &quot;$input&quot; got invalid value…</code></td>
+<td>A value has the wrong type, or a required field is missing</td>
+</tr>
+<tr>
+<td><code>Value &quot;X&quot; does not exist in &quot;…&quot; enum</code></td>
+<td>Use one of the <a href="#codes">codes</a></td>
+</tr>
+<tr>
+<td><code>Cannot query field &quot;x&quot;…</code></td>
+<td>Check the field&#39;s name in the <a href="#reference">reference</a></td>
+</tr>
+<tr>
+<td><code>This action is unauthorized.</code></td>
+<td>Your account isn&#39;t allowed to: ask your shipping company</td>
+</tr>
+</tbody></table></div>
+<div class="callout"><p>Send <code>Content-Language: ar</code> to get messages in Arabic. Log the whole <code>errors</code> list when a request fails: it makes support much faster.</p>
+</div>
+</section>
+<section class="section"><h1 id="what-changed">What changed</h1>
+<p>If your integration follows an older version of these docs:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Change</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>serviceId</code> is required</strong> in <code>saveShipment</code></td>
+<td>Send a service id from <code>listShippingServicesDropdown</code></td>
+</tr>
+<tr>
+<td><code>recipientPhone</code> is optional</td>
+<td>Nothing: <code>recipientMobile</code> is still required</td>
+</tr>
+<tr>
+<td><code>customerId</code> in <code>listShipments</code> is a list</td>
+<td>Send <code>[123]</code> instead of <code>123</code></td>
+</tr>
+<tr>
+<td><code>ImageInput.file</code> is a required file upload</td>
+<td>Upload the file itself</td>
+</tr>
+<tr>
+<td><code>ttl</code> removed from <code>login</code></td>
+<td>Stop asking for it</td>
+</tr>
+<tr>
+<td><code>state</code>, <code>city</code>, <code>area</code> removed from <code>Branch</code></td>
+<td>Stop asking for them</td>
+</tr>
+<tr>
+<td>Shipment type <code>CLC</code> removed</td>
+<td>Use another <a href="#codes">shipment type</a></td>
+</tr>
+<tr>
+<td><code>ShipmentFees.post</code>, <code>tax</code> and <code>Shipment.createdBy</code> may be <code>null</code></td>
+<td>Handle an empty value</td>
+</tr>
+<tr>
+<td>Webhooks also send <code>shipmentCode</code></td>
+<td>Find the shipment by its code</td>
+</tr>
+</tbody></table></div>
+</section>
+		<section class="section" id="reference">
+			<h1>API reference</h1>
+			<p class="lead">Every operation and type available to your account. Click a type to jump to it.</p>
+			<h2 id="reference-operations"><a class="anchor" href="#reference-operations" aria-hidden="true">#</a>Operations</h2>
+			
+		<article class="ref" id="op-calculateShipmentFees">
+			<h3><span class="pill query">Query</span> <code>calculateShipmentFees</code></h3>
+			
+			<h4>Arguments</h4><div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>input</code> <span class="badge">required</span></td><td><a class="type" href="#type-CalculateShipmentFeesInput"><code>CalculateShipmentFeesInput!</code></a></td><td></td></tr></tbody></table></div>
+			<p class="returns">Returns <a class="type" href="#type-ShipmentFees"><code>ShipmentFees!</code></a></p>
+		</article>
+		<article class="ref" id="op-listCountriesDropdown">
+			<h3><span class="pill query">Query</span> <code>listCountriesDropdown</code></h3>
+			
+			
+			<p class="returns">Returns <a class="type" href="#type-DropdownEntry"><code>[DropdownEntry]!</code></a></p>
+		</article>
+		<article class="ref" id="op-listLookupEntriesDropdown">
+			<h3><span class="pill query">Query</span> <code>listLookupEntriesDropdown</code></h3>
+			
+			<h4>Arguments</h4><div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>input</code> <span class="badge">required</span></td><td><a class="type" href="#type-ListLookupEntriesFilterInput"><code>ListLookupEntriesFilterInput!</code></a></td><td></td></tr></tbody></table></div>
+			<p class="returns">Returns <a class="type" href="#type-DropdownEntry"><code>[DropdownEntry]</code></a></p>
+		</article>
+		<article class="ref" id="op-listPaymentTypesDropdown">
+			<h3><span class="pill query">Query</span> <code>listPaymentTypesDropdown</code></h3>
+			
+			<h4>Arguments</h4><div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>input</code> </td><td><a class="type" href="#type-ListPaymentTypesDropdownInput"><code>ListPaymentTypesDropdownInput</code></a></td><td></td></tr></tbody></table></div>
+			<p class="returns">Returns <a class="type" href="#type-DropdownEntry"><code>[DropdownEntry]</code></a></p>
+		</article>
+		<article class="ref" id="op-listShipments">
+			<h3><span class="pill query">Query</span> <code>listShipments</code></h3>
+			
+			<h4>Arguments</h4><div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>input</code> </td><td><a class="type" href="#type-ListShipmentsFilterInput"><code>ListShipmentsFilterInput</code></a></td><td></td></tr><tr><td><code>first</code> <span class="badge">required</span></td><td><code class="type">Int!</code></td><td>Limits number of fetched items. Maximum allowed value: 100.</td></tr><tr><td><code>page</code> </td><td><code class="type">Int</code></td><td>The offset from which items are returned.</td></tr></tbody></table></div>
+			<p class="returns">Returns <a class="type" href="#type-ShipmentPaginator"><code>ShipmentPaginator!</code></a></p>
+		</article>
+		<article class="ref" id="op-listShipmentTypesDropdown">
+			<h3><span class="pill query">Query</span> <code>listShipmentTypesDropdown</code></h3>
+			
+			<h4>Arguments</h4><div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>serviceId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>mobileActive</code> </td><td><code class="type">Boolean</code></td><td></td></tr></tbody></table></div>
+			<p class="returns">Returns <a class="type" href="#type-DropdownEntry"><code>[DropdownEntry]</code></a></p>
+		</article>
+		<article class="ref" id="op-listShippingServicesDropdown">
+			<h3><span class="pill query">Query</span> <code>listShippingServicesDropdown</code></h3>
+			
+			<h4>Arguments</h4><div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>input</code> </td><td><a class="type" href="#type-ListShippingServicesFilterInput"><code>ListShippingServicesFilterInput</code></a></td><td></td></tr></tbody></table></div>
+			<p class="returns">Returns <a class="type" href="#type-DropdownEntry"><code>[DropdownEntry]!</code></a></p>
+		</article>
+		<article class="ref" id="op-listZonesDropdown">
+			<h3><span class="pill query">Query</span> <code>listZonesDropdown</code></h3>
+			
+			<h4>Arguments</h4><div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>input</code> </td><td><a class="type" href="#type-ListZonesFilterInput"><code>ListZonesFilterInput</code></a></td><td></td></tr></tbody></table></div>
+			<p class="returns">Returns <a class="type" href="#type-DropdownEntry"><code>[DropdownEntry]</code></a></p>
+		</article>
+		<article class="ref" id="op-login">
+			<h3><span class="pill mutation">Mutation</span> <code>login</code></h3>
+			
+			<h4>Arguments</h4><div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>input</code> <span class="badge">required</span></td><td><a class="type" href="#type-LoginInput"><code>LoginInput!</code></a></td><td></td></tr></tbody></table></div>
+			<p class="returns">Returns <a class="type" href="#type-UserWithToken"><code>UserWithToken!</code></a></p>
+		</article>
+		<article class="ref" id="op-saveShipment">
+			<h3><span class="pill mutation">Mutation</span> <code>saveShipment</code></h3>
+			
+			<h4>Arguments</h4><div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>input</code> <span class="badge">required</span></td><td><a class="type" href="#type-ShipmentInput"><code>ShipmentInput!</code></a></td><td></td></tr></tbody></table></div>
+			<p class="returns">Returns <a class="type" href="#type-Shipment"><code>Shipment</code></a></p>
+		</article>
+		<article class="ref" id="op-shipment">
+			<h3><span class="pill query">Query</span> <code>shipment</code></h3>
+			
+			<h4>Arguments</h4><div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>code</code> </td><td><code class="type">String</code></td><td></td></tr></tbody></table></div>
+			<p class="returns">Returns <a class="type" href="#type-Shipment"><code>Shipment</code></a></p>
+		</article>
+			<h2 id="reference-types"><a class="anchor" href="#reference-types" aria-hidden="true">#</a>Types</h2>
+			
+		<article class="ref" id="type-BoxSizeInput">
+			<h3><span class="pill input">Input</span> <code>BoxSizeInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>length</code> <span class="badge">required</span></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>width</code> <span class="badge">required</span></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>height</code> <span class="badge">required</span></td><td><code class="type">Float!</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-Branch">
+			<h3><span class="pill type">Type</span> <code>Branch</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>code</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>name</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>active</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>main</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>address</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>phone</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>fax</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>country</code></td><td><a class="type" href="#type-Country"><code>Country</code></a></td><td></td></tr><tr><td><code>warehouseSections</code></td><td><a class="type" href="#type-WarehouseSection"><code>[WarehouseSection]</code></a></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-CalculateShipmentFeesInput">
+			<h3><span class="pill input">Input</span> <code>CalculateShipmentFeesInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>customerTypeCode</code> </td><td><a class="type" href="#type-CustomerTypeCode"><code>CustomerTypeCode</code></a></td><td></td></tr><tr><td><code>serviceId</code> <span class="badge">required</span></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>weight</code> <span class="badge">required</span></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>senderZoneId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>senderSubzoneId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>recipientZoneId</code> <span class="badge">required</span></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>recipientSubzoneId</code> <span class="badge">required</span></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>size</code> </td><td><a class="type" href="#type-BoxSizeInput"><code>BoxSizeInput</code></a></td><td></td></tr><tr><td><code>customerId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>price</code> <span class="badge">required</span></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>priceTypeCode</code> </td><td><a class="type" href="#type-ShipmentPriceTypeCode"><code>ShipmentPriceTypeCode</code></a></td><td></td></tr><tr><td><code>paymentTypeCode</code> </td><td><a class="type" href="#type-ShipmentPaymentTypeCode"><code>ShipmentPaymentTypeCode</code></a></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-Country">
+			<h3><span class="pill type">Type</span> <code>Country</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>code</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>name</code></td><td><code class="type">String!</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-CustomerTypeCode">
+			<h3><span class="pill enum">Enum</span> <code>CustomerTypeCode</code></h3>
+			<p>Customer type code</p>
+			<div class="enum"><code>MERCHANT</code> <code>INDIVIDUAL</code> <code>CONCIERGE</code></div>
+		</article>
+		<article class="ref" id="type-DateFilterInput">
+			<h3><span class="pill input">Input</span> <code>DateFilterInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>fromDays</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>fromDate</code> </td><td><code class="type">Date</code></td><td></td></tr><tr><td><code>toDate</code> </td><td><code class="type">Date</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-DeliveryAgentCustodyInput">
+			<h3><span class="pill input">Input</span> <code>DeliveryAgentCustodyInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>deliveryAgentId</code> </td><td><code class="type">Int</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-DropdownEntry">
+			<h3><span class="pill type">Type</span> <code>DropdownEntry</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>code</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>name</code></td><td><code class="type">String</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-FilterZonesByServiceInput">
+			<h3><span class="pill input">Input</span> <code>FilterZonesByServiceInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>serviceId</code> <span class="badge">required</span></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>customerId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>customerTypeCode</code> </td><td><a class="type" href="#type-CustomerTypeCode"><code>CustomerTypeCode</code></a></td><td></td></tr><tr><td><code>fromZoneId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>fromSubzoneId</code> </td><td><code class="type">Int</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-Image">
+			<h3><span class="pill type">Type</span> <code>Image</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>path</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>subjectCode</code></td><td><code class="type">String</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-ImageInput">
+			<h3><span class="pill input">Input</span> <code>ImageInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>file</code> <span class="badge">required</span></td><td><code class="type">Upload!</code></td><td></td></tr><tr><td><code>subjectCode</code> </td><td><code class="type">String</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-ListLookupEntriesFilterInput">
+			<h3><span class="pill input">Input</span> <code>ListLookupEntriesFilterInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>code</code> <span class="badge">required</span></td><td><code class="type">String!</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-ListPaymentTypesDropdownInput">
+			<h3><span class="pill input">Input</span> <code>ListPaymentTypesDropdownInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>customerId</code> </td><td><code class="type">Int</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-ListShipmentsFilterInput">
+			<h3><span class="pill input">Input</span> <code>ListShipmentsFilterInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code> </td><td><code class="type">[Int]</code></td><td></td></tr><tr><td><code>code</code> </td><td><code class="type">[String]</code></td><td></td></tr><tr><td><code>search</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>refNumber</code> </td><td><code class="type">[String]</code></td><td></td></tr><tr><td><code>typeCode</code> </td><td><a class="type" href="#type-ShipmentTypeCode"><code>ShipmentTypeCode</code></a></td><td></td></tr><tr><td><code>paymentTypeCode</code> </td><td><a class="type" href="#type-ShipmentPaymentTypeCode"><code>ShipmentPaymentTypeCode</code></a></td><td></td></tr><tr><td><code>customerTypeCode</code> </td><td><a class="type" href="#type-CustomerTypeCode"><code>CustomerTypeCode</code></a></td><td></td></tr><tr><td><code>branchId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>originBranchId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>serviceId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>customerId</code> </td><td><code class="type">[Int]</code></td><td></td></tr><tr><td><code>userId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>inDeliveryAgentCustody</code> </td><td><a class="type" href="#type-DeliveryAgentCustodyInput"><code>DeliveryAgentCustodyInput</code></a></td><td></td></tr><tr><td><code>senderZoneId</code> </td><td><code class="type">[Int]</code></td><td></td></tr><tr><td><code>senderSubzoneId</code> </td><td><code class="type">[Int]</code></td><td></td></tr><tr><td><code>recipientZoneId</code> </td><td><code class="type">[Int]</code></td><td></td></tr><tr><td><code>recipientSubzoneId</code> </td><td><code class="type">[Int]</code></td><td></td></tr><tr><td><code>date</code> </td><td><a class="type" href="#type-DateFilterInput"><code>DateFilterInput</code></a></td><td></td></tr><tr><td><code>lastTransactionDate</code> </td><td><a class="type" href="#type-DateFilterInput"><code>DateFilterInput</code></a></td><td></td></tr><tr><td><code>deliveredOrReturnedDate</code> </td><td><a class="type" href="#type-DateFilterInput"><code>DateFilterInput</code></a></td><td></td></tr><tr><td><code>statusCode</code> </td><td><a class="type" href="#type-ShipmentStatusCode"><code>[ShipmentStatusCode]</code></a></td><td></td></tr><tr><td><code>deliveryTypeCode</code> </td><td><a class="type" href="#type-ShipmentDeliveryTypeCode"><code>ShipmentDeliveryTypeCode</code></a></td><td></td></tr><tr><td><code>returnTypeCode</code> </td><td><a class="type" href="#type-ShipmentReturnTypeCode"><code>ShipmentReturnTypeCode</code></a></td><td></td></tr><tr><td><code>pendingCustomerAdjusting</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>pendingCustomerPayment</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>notDelivered</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>collected</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>paid</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>delivered</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>inWarehouse</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>forUnpacking</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>pendingCollection</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>lastDeliveryAgentId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>deliveryBefore</code> </td><td><code class="type">Date</code></td><td></td></tr><tr><td><code>sectionId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>hasProducts</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>new</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>cancelled</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>routeId</code> </td><td><code class="type">[Int]</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-ListShippingServicesFilterInput">
+			<h3><span class="pill input">Input</span> <code>ListShippingServicesFilterInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>customerTypeCode</code> </td><td><a class="type" href="#type-CustomerTypeCode"><code>CustomerTypeCode</code></a></td><td></td></tr><tr><td><code>customerId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>active</code> </td><td><code class="type">Boolean</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-ListZonesFilterInput">
+			<h3><span class="pill input">Input</span> <code>ListZonesFilterInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>name</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>parentId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>countryId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>branchId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>active</code> </td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>service</code> </td><td><a class="type" href="#type-FilterZonesByServiceInput"><code>FilterZonesByServiceInput</code></a></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-LoginInput">
+			<h3><span class="pill input">Input</span> <code>LoginInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>username</code> <span class="badge">required</span></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>password</code> <span class="badge">required</span></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>rememberMe</code> <span class="badge">required</span></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>fcmToken</code> </td><td><code class="type">String</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-Lookup">
+			<h3><span class="pill type">Type</span> <code>Lookup</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>code</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>name</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>entries</code></td><td><a class="type" href="#type-LookupEntry"><code>[LookupEntry]</code></a></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-LookupEntry">
+			<h3><span class="pill type">Type</span> <code>LookupEntry</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>code</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>name</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>active</code></td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>weight</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>lookup</code></td><td><a class="type" href="#type-Lookup"><code>Lookup!</code></a></td><td></td></tr><tr><td><code>mobileActive</code></td><td><code class="type">Boolean</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-PaginatorInfo">
+			<h3><span class="pill type">Type</span> <code>PaginatorInfo</code></h3>
+			<p>Information about pagination using a fully featured paginator.</p>
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>count</code></td><td><code class="type">Int!</code></td><td>Number of items in the current page.</td></tr><tr><td><code>currentPage</code></td><td><code class="type">Int!</code></td><td>Index of the current page.</td></tr><tr><td><code>firstItem</code></td><td><code class="type">Int</code></td><td>Index of the first item in the current page.</td></tr><tr><td><code>hasMorePages</code></td><td><code class="type">Boolean!</code></td><td>Are there more pages after this one?</td></tr><tr><td><code>lastItem</code></td><td><code class="type">Int</code></td><td>Index of the last item in the current page.</td></tr><tr><td><code>lastPage</code></td><td><code class="type">Int!</code></td><td>Index of the last available page.</td></tr><tr><td><code>perPage</code></td><td><code class="type">Int!</code></td><td>Number of items per page.</td></tr><tr><td><code>total</code></td><td><code class="type">Int!</code></td><td>Number of total available items.</td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-Permission">
+			<h3><span class="pill type">Type</span> <code>Permission</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>name</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>slug</code></td><td><code class="type">String!</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-Role">
+			<h3><span class="pill type">Type</span> <code>Role</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>code</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>name</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>usersCount</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>permissions</code></td><td><a class="type" href="#type-Permission"><code>[Permission]!</code></a></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-Sequence">
+			<h3><span class="pill type">Type</span> <code>Sequence</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>code</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>name</code></td><td><code class="type">String!</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-Shipment">
+			<h3><span class="pill type">Type</span> <code>Shipment</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>code</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>type</code></td><td><a class="type" href="#type-LookupEntry"><code>LookupEntry!</code></a></td><td></td></tr><tr><td><code>openable</code></td><td><a class="type" href="#type-LookupEntry"><code>LookupEntry!</code></a></td><td></td></tr><tr><td><code>date</code></td><td><code class="type">DateTime!</code></td><td></td></tr><tr><td><code>createdAt</code></td><td><code class="type">DateTime!</code></td><td></td></tr><tr><td><code>updatedAt</code></td><td><code class="type">DateTime</code></td><td></td></tr><tr><td><code>deliveryDate</code></td><td><code class="type">Date</code></td><td></td></tr><tr><td><code>deliveredOrReturnedDate</code></td><td><code class="type">DateTime</code></td><td></td></tr><tr><td><code>description</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>weight</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>piecesCount</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>collected</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>paidToCustomer</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>paidToDeliveryAgent</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>editable</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>trackingUrl</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>deletable</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>hasProducts</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>inWarehouse</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>unpacked</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>refNumber</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>notes</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>adminNotes</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>returnPiecesCount</code></td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>paymentType</code></td><td><a class="type" href="#type-LookupEntry"><code>LookupEntry!</code></a></td><td></td></tr><tr><td><code>priceType</code></td><td><a class="type" href="#type-LookupEntry"><code>LookupEntry!</code></a></td><td></td></tr><tr><td><code>deliveryType</code></td><td><a class="type" href="#type-LookupEntry"><code>LookupEntry</code></a></td><td></td></tr><tr><td><code>returnType</code></td><td><a class="type" href="#type-LookupEntry"><code>LookupEntry</code></a></td><td></td></tr><tr><td><code>transactionType</code></td><td><a class="type" href="#type-TransactionType"><code>TransactionType!</code></a></td><td></td></tr><tr><td><code>branch</code></td><td><a class="type" href="#type-Branch"><code>Branch!</code></a></td><td></td></tr><tr><td><code>originBranch</code></td><td><a class="type" href="#type-Branch"><code>Branch!</code></a></td><td></td></tr><tr><td><code>status</code></td><td><a class="type" href="#type-LookupEntry"><code>LookupEntry!</code></a></td><td></td></tr><tr><td><code>returnStatus</code></td><td><a class="type" href="#type-LookupEntry"><code>LookupEntry</code></a></td><td></td></tr><tr><td><code>service</code></td><td><a class="type" href="#type-ShippingService"><code>ShippingService!</code></a></td><td></td></tr><tr><td><code>history</code></td><td><a class="type" href="#type-Shipment"><code>[Shipment!]!</code></a></td><td></td></tr><tr><td><code>createdBy</code></td><td><a class="type" href="#type-User"><code>User</code></a></td><td></td></tr><tr><td><code>updatedBy</code></td><td><a class="type" href="#type-User"><code>User</code></a></td><td></td></tr><tr><td><code>warehouseSection</code></td><td><a class="type" href="#type-WarehouseSection"><code>WarehouseSection</code></a></td><td></td></tr><tr><td><code>customerType</code></td><td><a class="type" href="#type-LookupEntry"><code>LookupEntry!</code></a></td><td></td></tr><tr><td><code>attempts</code></td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>cancellable</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>cancelled</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>price</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>amount</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>deliveryFees</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>extraWeightFees</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>collectionFees</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>totalAmount</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>deliveredAmount</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>returningDueFees</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>returnedValue</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>allDueFees</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>collectedFees</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>customerDue</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>collectedAmount</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>pendingCollectionAmount</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>returnFees</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>postFees</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>tax</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>deliveryCommission</code></td><td><code class="type">Float</code></td><td></td></tr><tr><td><code>recipientName</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>recipientPhone</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>recipientMobile</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>recipientZone</code></td><td><a class="type" href="#type-Zone"><code>Zone!</code></a></td><td></td></tr><tr><td><code>recipientSubzone</code></td><td><a class="type" href="#type-Zone"><code>Zone!</code></a></td><td></td></tr><tr><td><code>recipientAddress</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>recipientPostalCode</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>recipientLatitude</code></td><td><code class="type">Float</code></td><td></td></tr><tr><td><code>recipientLongitude</code></td><td><code class="type">Float</code></td><td></td></tr><tr><td><code>senderName</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>senderPhone</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>senderMobile</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>senderZone</code></td><td><a class="type" href="#type-Zone"><code>Zone</code></a></td><td></td></tr><tr><td><code>senderSubzone</code></td><td><a class="type" href="#type-Zone"><code>Zone</code></a></td><td></td></tr><tr><td><code>senderAddress</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>senderPostalCode</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>senderLatitude</code></td><td><code class="type">Float</code></td><td></td></tr><tr><td><code>senderLongitude</code></td><td><code class="type">Float</code></td><td></td></tr><tr><td><code>deliveryOtp</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>hasDeliveryOtp</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>images</code></td><td><a class="type" href="#type-Image"><code>[Image]</code></a></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-ShipmentDeliveryTypeCode">
+			<h3><span class="pill enum">Enum</span> <code>ShipmentDeliveryTypeCode</code></h3>
+			<p>Shipment delivery type code</p>
+			<div class="enum"><code>FD</code> <code>PD</code></div>
+		</article>
+		<article class="ref" id="type-ShipmentFees">
+			<h3><span class="pill type">Type</span> <code>ShipmentFees</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>amount</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>delivery</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>weight</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>collection</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>post</code></td><td><code class="type">Float</code></td><td></td></tr><tr><td><code>tax</code></td><td><code class="type">Float</code></td><td></td></tr><tr><td><code>return</code></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>total</code></td><td><code class="type">Float!</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-ShipmentInput">
+			<h3><span class="pill input">Input</span> <code>ShipmentInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>code</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>date</code> </td><td><code class="type">DateTime</code></td><td></td></tr><tr><td><code>deliveryDate</code> </td><td><code class="type">Date</code></td><td></td></tr><tr><td><code>serviceId</code> <span class="badge">required</span></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>description</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>refNumber</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>weight</code> </td><td><code class="type">Float</code></td><td></td></tr><tr><td><code>size</code> </td><td><a class="type" href="#type-BoxSizeInput"><code>BoxSizeInput</code></a></td><td></td></tr><tr><td><code>piecesCount</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>returnPiecesCount</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>price</code> </td><td><code class="type">Float</code></td><td></td></tr><tr><td><code>notes</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>typeCode</code> </td><td><a class="type" href="#type-ShipmentTypeCode"><code>ShipmentTypeCode</code></a></td><td></td></tr><tr><td><code>priceTypeCode</code> </td><td><a class="type" href="#type-ShipmentPriceTypeCode"><code>ShipmentPriceTypeCode</code></a></td><td></td></tr><tr><td><code>paymentTypeCode</code> </td><td><a class="type" href="#type-ShipmentPaymentTypeCode"><code>ShipmentPaymentTypeCode</code></a></td><td></td></tr><tr><td><code>openableCode</code> </td><td><a class="type" href="#type-ShipmentOpenableCode"><code>ShipmentOpenableCode</code></a></td><td></td></tr><tr><td><code>shipmentProducts</code> </td><td><a class="type" href="#type-ShipmentProductInput"><code>[ShipmentProductInput]</code></a></td><td></td></tr><tr><td><code>senderName</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>senderZoneId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>senderSubzoneId</code> </td><td><code class="type">Int</code></td><td></td></tr><tr><td><code>senderPhone</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>senderMobile</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>senderAddress</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>senderPostalCode</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>senderLatitude</code> </td><td><code class="type">Float</code></td><td></td></tr><tr><td><code>senderLongitude</code> </td><td><code class="type">Float</code></td><td></td></tr><tr><td><code>recipientName</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>recipientZoneId</code> <span class="badge">required</span></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>recipientSubzoneId</code> <span class="badge">required</span></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>recipientPhone</code> </td><td><code class="type">String</code></td><td></td></tr><tr><td><code>recipientMobile</code> <span class="badge">required</span></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>recipientAddress</code> <span class="badge">required</span></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>recipientLatitude</code> </td><td><code class="type">Float</code></td><td></td></tr><tr><td><code>recipientLongitude</code> </td><td><code class="type">Float</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-ShipmentOpenableCode">
+			<h3><span class="pill enum">Enum</span> <code>ShipmentOpenableCode</code></h3>
+			<p>Shipment openable code</p>
+			<div class="enum"><code>Y</code> <code>N</code></div>
+		</article>
+		<article class="ref" id="type-ShipmentPaginator">
+			<h3><span class="pill type">Type</span> <code>ShipmentPaginator</code></h3>
+			<p>A paginated list of Shipment items.</p>
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>paginatorInfo</code></td><td><a class="type" href="#type-PaginatorInfo"><code>PaginatorInfo!</code></a></td><td>Pagination information about the list of items.</td></tr><tr><td><code>data</code></td><td><a class="type" href="#type-Shipment"><code>[Shipment!]!</code></a></td><td>A list of Shipment items.</td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-ShipmentPaymentTypeCode">
+			<h3><span class="pill enum">Enum</span> <code>ShipmentPaymentTypeCode</code></h3>
+			<p>Shipment payment type code</p>
+			<div class="enum"><code>COLC</code> <code>PAID</code> <code>CASH</code> <code>CRDT</code> <code>VISA</code></div>
+		</article>
+		<article class="ref" id="type-ShipmentPriceTypeCode">
+			<h3><span class="pill enum">Enum</span> <code>ShipmentPriceTypeCode</code></h3>
+			<p>Shipment price type code</p>
+			<div class="enum"><code>EXCLD</code> <code>INCLD</code></div>
+		</article>
+		<article class="ref" id="type-ShipmentProductInput">
+			<h3><span class="pill input">Input</span> <code>ShipmentProductInput</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>productId</code> <span class="badge">required</span></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>price</code> <span class="badge">required</span></td><td><code class="type">Float!</code></td><td></td></tr><tr><td><code>quantity</code> <span class="badge">required</span></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>typeCode</code> </td><td><a class="type" href="#type-ShipmentProductTypeCode"><code>ShipmentProductTypeCode</code></a></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-ShipmentProductTypeCode">
+			<h3><span class="pill enum">Enum</span> <code>ShipmentProductTypeCode</code></h3>
+			<p>Shipment product type code</p>
+			<div class="enum"><code>IN</code> <code>OUT</code></div>
+		</article>
+		<article class="ref" id="type-ShipmentReturnTypeCode">
+			<h3><span class="pill enum">Enum</span> <code>ShipmentReturnTypeCode</code></h3>
+			<p>Shipment return type code</p>
+			<div class="enum"><code>FFC</code> <code>FPC</code> <code>WFDF</code> <code>WODF</code> <code>WPDF</code> <code>PRTS</code></div>
+		</article>
+		<article class="ref" id="type-ShipmentStatusCode">
+			<h3><span class="pill enum">Enum</span> <code>ShipmentStatusCode</code></h3>
+			<p>Shipment status code</p>
+			<div class="enum"><code>PKR</code> <code>PKM</code> <code>PKH</code> <code>PKD</code> <code>RJCT</code> <code>BMR</code> <code>BMT</code> <code>PRP</code> <code>PRPD</code> <code>RITS</code> <code>STD</code> <code>OTD</code> <code>DTR</code> <code>DEX</code> <code>HTR</code> <code>RTS</code> <code>RCV</code> <code>OTR</code> <code>RTRN</code></div>
+		</article>
+		<article class="ref" id="type-ShipmentTypeCode">
+			<h3><span class="pill enum">Enum</span> <code>ShipmentTypeCode</code></h3>
+			<p>Shipment type code</p>
+			<div class="enum"><code>FDP</code> <code>PDP</code> <code>PTP</code> <code>RTS</code></div>
+		</article>
+		<article class="ref" id="type-ShippingService">
+			<h3><span class="pill type">Type</span> <code>ShippingService</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>code</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>name</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>days</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>egsCode</code></td><td><code class="type">String</code></td><td></td></tr><tr><td><code>active</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>branch</code></td><td><a class="type" href="#type-Branch"><code>Branch</code></a></td><td></td></tr><tr><td><code>shipmentTypes</code></td><td><a class="type" href="#type-LookupEntry"><code>[LookupEntry]</code></a></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-TransactionType">
+			<h3><span class="pill type">Type</span> <code>TransactionType</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>code</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>name</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>active</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>type</code></td><td><a class="type" href="#type-LookupEntry"><code>LookupEntry</code></a></td><td></td></tr><tr><td><code>sequence</code></td><td><a class="type" href="#type-Sequence"><code>Sequence</code></a></td><td></td></tr><tr><td><code>branch</code></td><td><a class="type" href="#type-Branch"><code>Branch</code></a></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-User">
+			<h3><span class="pill type">Type</span> <code>User</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>username</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>active</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>isSuper</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>userBranches</code></td><td><a class="type" href="#type-UserBranch"><code>[UserBranch]!</code></a></td><td></td></tr><tr><td><code>roles</code></td><td><a class="type" href="#type-Role"><code>[Role!]!</code></a></td><td></td></tr><tr><td><code>permissions</code></td><td><a class="type" href="#type-Permission"><code>[Permission]!</code></a></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-UserBranch">
+			<h3><span class="pill type">Type</span> <code>UserBranch</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>user</code></td><td><a class="type" href="#type-User"><code>User!</code></a></td><td></td></tr><tr><td><code>branch</code></td><td><a class="type" href="#type-Branch"><code>Branch!</code></a></td><td></td></tr><tr><td><code>default</code></td><td><code class="type">Boolean!</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-UserWithToken">
+			<h3><span class="pill type">Type</span> <code>UserWithToken</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>user</code></td><td><a class="type" href="#type-User"><code>User!</code></a></td><td></td></tr><tr><td><code>token</code></td><td><code class="type">String!</code></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-WarehouseSection">
+			<h3><span class="pill type">Type</span> <code>WarehouseSection</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>name</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>branch</code></td><td><a class="type" href="#type-Branch"><code>Branch!</code></a></td><td></td></tr><tr><td><code>active</code></td><td><code class="type">Boolean!</code></td><td></td></tr><tr><td><code>shipments</code></td><td><a class="type" href="#type-Shipment"><code>[Shipment]</code></a></td><td></td></tr></tbody></table></div>
+		</article>
+		<article class="ref" id="type-Zone">
+			<h3><span class="pill type">Type</span> <code>Zone</code></h3>
+			
+			<div class="table-wrap"><table class="fields"><thead><tr><th>Name</th><th>Type</th><th></th></tr></thead><tbody><tr><td><code>id</code></td><td><code class="type">Int!</code></td><td></td></tr><tr><td><code>code</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>name</code></td><td><code class="type">String!</code></td><td></td></tr><tr><td><code>parent</code></td><td><a class="type" href="#type-Zone"><code>Zone</code></a></td><td></td></tr><tr><td><code>active</code></td><td><code class="type">Boolean</code></td><td></td></tr><tr><td><code>branch</code></td><td><a class="type" href="#type-Branch"><code>Branch</code></a></td><td></td></tr><tr><td><code>children</code></td><td><a class="type" href="#type-Zone"><code>[Zone]</code></a></td><td></td></tr></tbody></table></div>
+		</article>
+		</section>
+			<footer class="footer">© 2026 Accurate · Questions? Contact your shipping company.</footer>
+		</main>
+	</div>
+
+	<script src="app.js"></script>
+</body>
+</html>
