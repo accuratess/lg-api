@@ -46,7 +46,7 @@ export default {
 		options: {
 			appTitle: "Accurate API",
 			appLogo: "/Accurate-logistics.png",
-			siteRoot: "/accuratess",
+			siteRoot: "/lg-api",
 			pages: [
 				{ title: "English", content: guide("en") },
 				{ title: "Arabic", content: guide("ar") },
