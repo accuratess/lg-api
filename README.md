@@ -13,15 +13,20 @@ The documentation of the Accurate shipping API, published with GitHub Pages from
 | `assets/` | Logo and icon |
 | `build.mjs` | Builds the site into `docs/` |
 | `docs/` | The built website (generated: don't edit by hand) |
+| `.github/workflows/pages.yml` | Builds and publishes the site on every push to `main` |
 
 ## Edit and publish
 
+Edit the pages or `schema.gql`, commit and push to `main`: the **Publish docs** workflow
+(`.github/workflows/pages.yml`) builds the site and publishes it to GitHub Pages in about a minute.
+Its progress is under the repo's **Actions** tab.
+
+To preview locally before pushing:
+
 ```bash
 npm install      # once
-npm run build    # writes docs/
+npm run build    # writes docs/, then open docs/index.html
 ```
-
-Commit everything, including `docs/`, and push: GitHub Pages publishes it.
 
 ## Writing pages
 
